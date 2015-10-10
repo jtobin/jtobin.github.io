@@ -15,8 +15,9 @@ I specialize in:
 *  data munging and numerical algorithms
 *  asynchronous/remote work
 
-I also like to keep my toes dipped in academia and am interested in other
-fields surrounding computation and probability.  I enjoy following research in:
+I like to keep my toes dipped in academia and am interested in other fields
+surrounding computation and probability as well.  I enjoy following research
+in:
 
 *  theoretical computer science
 *  probability theory
@@ -25,7 +26,8 @@ fields surrounding computation and probability.  I enjoy following research in:
 *  distributed systems
 
 I try to at least attend [NIPS](https://nips.cc) and
-[ICFP](http://http://icfpconference.org/) annually, so feel free to say hello.
+[ICFP](http://http://icfpconference.org/) annually, so feel free to say hello
+if you see me there.
 
 I've been involved in a number of senior- and principal-level engineering,
 research, and analytics positions and am always happy to hear from people doing
