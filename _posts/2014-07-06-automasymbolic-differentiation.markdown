@@ -3,7 +3,7 @@ layout: post
 title: "Automasymbolic Differentiation"
 categories:
   - language-engineering
-  - inference
+  - haskell
 ---
 
 Automatic differentiation is one of those things that's famous for not being as
