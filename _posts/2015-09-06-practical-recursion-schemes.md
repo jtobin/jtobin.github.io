@@ -502,7 +502,9 @@ What’s more, the [fusion achieved via this
 technique](http://fho.f12n.de/posts/2014-05-07-dont-fear-the-cat.html) is
 really quite lovely.
 
-Wrapping Up Hopefully this article helps fuel any ‘programming via structured
+## Wrapping Up
+
+Hopefully this article helps fuel any ‘programming via structured
 recursion’ trend that might be ever-so-slowly growing.
 
 When programming in a language like Haskell, a very natural pattern is to write
