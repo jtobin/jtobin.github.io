@@ -75,7 +75,7 @@ things over and over.  Look at how `tree 4` proceeds now:
 
 You could say that Haskell's `let` syntax enables *sharing* between
 computations; using it reduces the complexity of our tree implementation from
-$O(2^n)$ to $O(n)$.  `tree 50` now returns instantly:
+$$O(2^n)$$ to $$O(n)$$.  `tree 50` now returns instantly:
 
     > tree 50
     1125899906842624
@@ -249,7 +249,7 @@ this (directed, acyclic) graph.  Here's an idea:
 
 * [topologically sort](https://en.wikipedia.org/wiki/Topological_sorting) the
   graph, yielding a linear ordering of vertices such that for every edge
-  $u \to v$, $v$ is ordered before $u$.
+  $$u \to v$$, $$v$$ is ordered before $$u$$.
 * iterate through the sorted vertices, interpreting them as desired and storing
   the interpretation
 * look up the previously-interpreted vertices as needed
