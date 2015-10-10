@@ -7,7 +7,7 @@ kramdown:
   hard_wrap: false
 
 # Permalinks
-permalink:        pretty
+permalink:        ':title'
 relative_permalinks: true
 
 # Setup
