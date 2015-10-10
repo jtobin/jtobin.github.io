@@ -1,86 +1,88 @@
 /*
- *  __                  __
- * /\ \                /\ \
- * \ \ \___   __  __   \_\ \     __
- *  \ \  _ `\/\ \/\ \  /'_` \  /'__`\
- *   \ \ \ \ \ \ \_\ \/\ \_\ \/\  __/
- *    \ \_\ \_\/`____ \ \___,_\ \____\
- *     \/_/\/_/`/___/> \/__,_ /\/____/
- *                /\___/
- *                \/__/
- *
- * Designed, built, and released under MIT license by @mdo. Learn more at
- * https://github.com/poole/hyde.
- */
+ *  *  __                  __
+ *   * /\ \                /\ \
+ *    * \ \ \___   __  __   \_\ \     __
+ *     *  \ \  _ `\/\ \/\ \  /'_` \  /'__`\
+ *      *   \ \ \ \ \ \ \_\ \/\ \_\ \/\  __/
+ *       *    \ \_\ \_\/`____ \ \___,_\ \____\
+ *        *     \/_/\/_/`/___/> \/__,_ /\/____/
+ *         *                /\___/
+ *          *                \/__/
+ *           *
+ *            * Designed, built, and released under MIT license by @mdo. Learn more at
+ *             * https://github.com/poole/hyde.
+ *              */
 
 
 /*
- * Contents
- *
- * Global resets
- * Sidebar
- * Container
- * Reverse layout
- * Themes
- */
+ *  * Contents
+ *   *
+ *    * Global resets
+ *     * Sidebar
+ *      * Container
+ *       * Reverse layout
+ *        * Themes
+ *         */
 
 
 /*
- * Global resets
- *
- * Update the foundational and global aspects of the page.
- */
+ *  * Global resets
+ *   *
+ *    * Update the foundational and global aspects of the page.
+ *     */
 
 html {
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
 }
 @media (min-width: 48em) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 @media (min-width: 58em) {
   html {
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
+#markdown-toc {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
 
 /*
- * Sidebar
- *
- * Flexible banner for housing site name, intro, and "footer" content. Starts
- * out above content in mobile and later moves to the side with wider viewports.
- */
+ *  * Sidebar
+ *   *
+ *    * Flexible banner for housing site name, intro, and "footer" content. Starts
+ *     * out above content in mobile and later moves to the side with wider viewports.
+ *      */
 
 .sidebar {
   text-align: center;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
-  background-color: #202020;
+  background-color: #222;
+  background-image: url('/public/sidebar.png');
+  border-right: solid 1px #000;
 }
+
 @media (min-width: 48em) {
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 18rem;
+    width: 20rem;
     text-align: left;
   }
 }
 
 /* Sidebar links */
 .sidebar a {
-  color: #fff;
-}
-
-/* About section */
-.sidebar-about h1 {
-  color: #fff;
-  margin-top: 0;
-  font-family: "Abril Fatface", serif;
-  font-size: 3.25rem;
+  color: #eee;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+  opacity: 0.5;
 }
 
 /* Sidebar nav */
@@ -100,26 +102,39 @@ a.sidebar-nav-item:focus {
 }
 
 /* Sticky sidebar
- *
- * Add the `sidebar-sticky` class to the sidebar's container to affix it the
- * contents to the bottom of the sidebar in tablets and up.
- */
+ *  *
+ *   * Add the `sidebar-sticky` class to the sidebar's container to affix it the
+ *    * contents to the bottom of the sidebar in tablets and up.
+ *     */
 
 @media (min-width: 48em) {
   .sidebar-sticky {
     position: absolute;
-    right:  1rem;
+    right: 1rem;
     bottom: 1rem;
-    left:   1rem;
+    left:  1rem;
   }
+}
+
+.sidebar h3 {
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
+  color: #eee;
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.sidebar p.small {
+    font-size: 12px;
+    color: #999;
+    opacity: 0.6;
 }
 
 
 /* Container
- *
- * Align the contents of the site above the proper threshold with some margin-fu
- * with a 25%-wide `.sidebar`.
- */
+ *  *
+ *   * Align the contents of the site above the proper threshold with some margin-fu
+ *    * with a 25%-wide `.sidebar`.
+ *     */
 
 .content {
   padding-top:    4rem;
@@ -128,25 +143,25 @@ a.sidebar-nav-item:focus {
 
 @media (min-width: 48em) {
   .content {
-    max-width: 38rem;
-    margin-left: 20rem;
+    max-width: 42rem;
+    margin-left: 22rem;
     margin-right: 2rem;
   }
 }
 
 @media (min-width: 64em) {
   .content {
-    margin-left: 22rem;
+    margin-left: 24rem;
     margin-right: 4rem;
   }
 }
 
 
 /*
- * Reverse layout
- *
- * Flip the orientation of the page by placing the `.sidebar` on the right.
- */
+ *  * Reverse layout
+ *   *
+ *    * Flip the orientation of the page by placing the `.sidebar` on the right.
+ *     */
 
 @media (min-width: 48em) {
   .layout-reverse .sidebar {
@@ -166,14 +181,57 @@ a.sidebar-nav-item:focus {
   }
 }
 
+/*
+ *  * Archive
+ *   */
 
+ul#archive {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul#archive li {
+    padding: 0;
+}
+
+ul#archive .post-date {
+    margin-bottom: 0.5em;
+}
+
+ul#archive h3 {
+    margin: 0;
+    display: none;
+}
+
+ul#archive .categories {
+    padding-left: 0;
+    back
+    list-style-type: none;
+}
+
+ul#archive .categories li {
+    display: inline-block;
+    padding: 0em .25em;
+    background-color: #f9f9f9;
+    color: #444;
+    border-radius: 3px;
+    border: solid 1px #eee;
+    font-size: 14px;
+}
+
+ul#archive .archive-view {
+    font-size: 14px;
+    font-weight: normal;
+    float: right;
+    color: #268bd2;
+}
 
 /*
- * Themes
- *
- * As of v1.1, Hyde includes optional themes to color the sidebar and links
- * within blog posts. To use, add the class of your choosing to the `body`.
- */
+ *  * Themes
+ *   *
+ *    * As of v1.1, Hyde includes optional themes to color the sidebar and links
+ *     * within blog posts. To use, add the class of your choosing to the `body`.
+ *      */
 
 /* Base16 (http://chriskempson.github.io/base16/#default) */
 
@@ -248,3 +306,4 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
