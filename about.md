@@ -1,30 +1,39 @@
 ---
 layout: page
-title: About
+title: "About"
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+I'm a professional engineering, quantitative, and research consultant based out
+of lovely Auckland, New Zealand.
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+I specialize in:
 
-There are currently two themes built on Poole:
+*  statically-typed functional programming
+*  compilers and language engineering
+*  probabilistic programming
+*  Bayesian statistics/machine learning
+*  data munging and numerical algorithms
+*  asynchronous/remote work
+*  technical writing and communication
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+I also like to keep my toes dipped in academia and am interested in fields
+surrounding computation and probability.  I enjoy research in:
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+*  theoretical computer science
+*  probability theory
+*  quantum information
+*  cryptography
+*  microeconomics, algorithmic game theory, and mechanism design
+*  distributed systems
 
-## Setup
+I try to at least attend [NIPS](https://nips.cc) and
+[ICFP](http://http://icfpconference.org/) annually, so feel free to say hello.
 
-Some fun facts about the setup of this project include:
+I've been involved in a number of senior- and principal-level engineering &
+analytics positions and am always happy to hear from people doing interesting
+things.  Feel free to [get in touch](mailto:jared@jtobin.ca) if you might be
+keen on doing something together.  I'm particularly delighted to hear from
+people who are working on open-source projects or open access research.
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
+![Hey.](../images/jtobin_bondi.jpg "Hey.")
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!

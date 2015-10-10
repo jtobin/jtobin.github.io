@@ -1,6 +1,10 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 highlighter:      pygments
+
+kramdown:
+  input: GFM
+  hard_wrap: false
 
 # Permalinks
 permalink:        pretty
@@ -16,10 +20,7 @@ author:
 
 paginate:         5
 
-# Custom vars
-# version:          2.1.0
-
 twitter: https://twitter.com/jaredtobin
-medium: https://medium.com/@jaredtobin
-github: https://github.com/jtobin
+medium:  https://medium.com/@jaredtobin
+github:  https://github.com/jtobin
 keybase: https://keybase.io/jtobin
