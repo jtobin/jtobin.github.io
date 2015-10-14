@@ -4,7 +4,7 @@ title: "About"
 ---
 
 I'm a professional engineering, quantitative, and research consultant based out
-of lovely Auckland, New Zealand.
+of Auckland, New Zealand.
 
 I specialize in:
 
