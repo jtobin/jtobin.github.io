@@ -146,9 +146,9 @@ But that's a no go.  'ad' throws a type error, as presumably we'd be at risk of
 perturbation confusion:
 
     Couldn't match expected type ‘AD
-                                    s (Numeric.AD.Internal.Forward.Forward (Expr c))
-                                  -> AD s (Numeric.AD.Internal.Forward.Forward (Expr c))’
-                with actual type ‘t’
+           s (Numeric.AD.Internal.Forward.Forward (Expr c))
+        -> AD s (Numeric.AD.Internal.Forward.Forward (Expr c))’
+       with actual type ‘t’
       because type variable ‘s’ would escape its scope
     This (rigid, skolem) type variable is bound by
       a type expected by the context:
@@ -186,10 +186,10 @@ toDerivative v expr = diff (autoEval v expr)
 
 which, though it has a weird-looking type, typechecks and does the trick:
 
-    > let diffExpr = toDerivative "x" (Mul (Lit 2) (Mul (Var "x") (Var "x"))) (Var "x")
+    > let d = toDerivative "x" (Mul (Lit 2) (Mul (Var "x") (Var "x"))) (Var "x")
     Mul (Add (Mul (Var "x") (Lit 1)) (Mul (Lit 1) (Var "x"))) (Lit 2)
 
-    > eval . close "x" 1 $ diffExpr
+    > eval . close "x" 1 $ d
     4
 
 So now we have access to a reified AST for a derivative (or gradient), which
@@ -238,7 +238,7 @@ Which lets us do some work up-front:
 
 But there are also some more involved optimizations that can be useful for some
 languages.  The basic language I've been using above, for example, has no
-explicit support for sharing common subexpressions.  You'll recall from [one of my previous posts](/blog/2014/05/29/sharing-in-haskell-edsls/) that we
+explicit support for sharing common subexpressions.  You'll recall from [one of my previous posts](http://jtobin.ca/sharing-in-haskell-edsls/) that we
 have a variety of methods to do that in Haskell EDSLs, including some that
 allow sharing to be observed without modifying the underlying language.  We can
 use `data-reify`, for example, to observe any implicit sharing in expressions:
@@ -256,7 +256,7 @@ for performing common subexpression elimination on graphs returned by
     let [(5,LitF 2),(1,AddF 2 6),(3,AddF 4 4),(6,AddF 7 10),(2,MulF 3 5),
     (10,MulF 3 8),(8,MulF 4 4),(7,MulF 8 3),(4,VarF "x")] in 1
 
-With an appropriate [graph evaluator](/blog/2014/05/29/sharing-in-haskell-edsls/)
+With an appropriate [graph evaluator](http://jtobin.ca/sharing-in-haskell-edsls/)
 we can cut down the size of the syntax we have to traverse substantially.
 
 Happy automasymbolic differentiating!
