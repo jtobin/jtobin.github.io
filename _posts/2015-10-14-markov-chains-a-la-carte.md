@@ -6,7 +6,7 @@ categories:
   - statistics
 ---
 
-(This article was originally published at [Medium](https://medium.com/@jaredtobin/a-framework-for-markov-chain-monte-carlo-3fc40df45592))
+(This article was originally published at [Medium](https://medium.com/@jaredtobin/markov-chains-a-la-carte-3fc40df45592))
 
 I’ve released a number of libraries for doing Markov Chain Monte Carlo (MCMC)
 in Haskell.
