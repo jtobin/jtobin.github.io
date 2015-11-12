@@ -9,10 +9,10 @@ of Auckland, New Zealand.
 I specialize in:
 
 *  statically-typed functional programming
+*  data science and numerical algorithms
 *  compilers and language engineering
 *  probabilistic programming
 *  Bayesian statistics/machine learning
-*  data munging and numerical algorithms
 *  asynchronous/remote work
 
 I like to keep my toes dipped in academia and am interested in other fields
