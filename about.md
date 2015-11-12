@@ -11,7 +11,6 @@ I specialize in:
 *  statically-typed functional programming
 *  data science and numerical algorithms
 *  compilers and language engineering
-*  probabilistic programming
 *  Bayesian statistics/machine learning
 *  asynchronous/remote work
 
@@ -19,11 +18,9 @@ I like to keep my toes dipped in academia and am interested in other fields
 surrounding computation and probability as well.  I enjoy following research
 in:
 
+*  probabilistic programming
 *  theoretical computer science
 *  probability theory
-*  quantum information
-*  microeconomics, algorithmic game theory, and mechanism design
-*  distributed systems
 
 I try to at least attend [NIPS](https://nips.cc) and
 [ICFP](http://http://icfpconference.org/) annually, so feel free to say hello
