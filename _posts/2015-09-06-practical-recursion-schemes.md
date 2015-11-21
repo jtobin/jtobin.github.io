@@ -41,10 +41,12 @@ implements all the background plumbing one needs to get started.
 In particular, to feel comfortable using recursion-schemes I found that there
 were a few key patterns worth understanding:
 
-Factoring recursion out of your data types using pattern functors and a
-fixed-point wrapper.  Using the ‘Foldable’ & ‘Unfoldable’ classes, plus
-navigating the ‘Base’ type family.  How to use some of the more common
-recursion schemes out there for everyday tasks.
+* Factoring recursion out of your data types using pattern functors and a
+  fixed-point wrapper.
+* Using the ‘Foldable’ & ‘Unfoldable’ classes, plus navigating the ‘Base’ type
+  family.
+* How to use some of the more common recursion schemes out there for everyday
+  tasks.
 
 ## The Basics
 
