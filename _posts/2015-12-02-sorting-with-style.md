@@ -48,7 +48,7 @@ unfolder xs  = NodeF l r where
 ```
 
 On the other hand, we can also collapse an existing tree back into a list.  The
-following 'folder' function defines how to collapse any given part of a tree
+following `folder` function defines how to collapse any given part of a tree
 into the corresponding part of a list; again we just pattern match on whatever
 part of the tree we're looking at, and construct the complementary list:
 
@@ -81,8 +81,8 @@ Pretty concise!
 
 The code is eminently clean and faithful to the high-level algorithm
 description: first recursively divide a collection into smaller subcollections
-- via a binary tree and 'unfolder' - and then recursively sort and merge the
-subcollections to reconstruct the (now sorted) original one - via 'folder'.
+- via a binary tree and `unfolder` - and then recursively sort and merge the
+subcollections to reconstruct the (now sorted) original one - via `folder`.
 
 A version of this post originally appeared on the [Fugue
 blog](https://blog.fugue.co/).
