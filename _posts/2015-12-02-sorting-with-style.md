@@ -9,7 +9,7 @@ categories:
 comparison-based sorting algorithm that starts by first recursively dividing a
 collection of orderable elements into smaller subcollections, and then finishes
 by recursively sorting and merging the smaller subcollections together to
-reconstruct the original (but now sorted) one.
+reconstruct the (now sorted) original.
 
 A clear implementation of mergesort should by definition be as faithful to that
 high-level description as possible.  We can get pretty close to that using the
