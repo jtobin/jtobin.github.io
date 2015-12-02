@@ -17,7 +17,7 @@ whole [recursion schemes](http://jtobin.ca/practical-recursion-schemes)
 business that I've talked about in the past.  Near the end of that article I
 briefly mentioned the idea of implementing mergesort via a
 [hylomorphism](https://en.wikipedia.org/wiki/Hylomorphism_(computer_science)),
-and here I just want to just elaborate on that a little.
+and here I just want to elaborate on that a little.
 
 Start with a collection of orderable elements.  We can divide the collection
 into a bunch of smaller collections by using a binary tree:
