@@ -28,10 +28,10 @@ into a bunch of smaller collections by using a binary tree:
 import Data.Functor.Foldable (hylo)
 import Data.List.Ordered (merge)
 
-data TreeF a r =
-    EmptyF
-  | LeafF a
-  | NodeF r r
+data Tree a r =
+    Empty
+  | Leaf a
+  | Node r r
   deriving Functor
 ```
 
@@ -41,9 +41,9 @@ collection - say, a basic Haskell list.  The following `unfolder` function
 defines what part of a tree to build for any corresponding part of a list:
 
 ``` haskell
-unfolder []  = EmptyF
-unfolder [x] = LeafF x
-unfolder xs  = NodeF l r where
+unfolder []  = Empty
+unfolder [x] = Leaf x
+unfolder xs  = Node l r where
   (l, r) = splitAt (length xs `div` 2) xs
 ```
 
@@ -53,9 +53,9 @@ into the corresponding part of a list; again we just pattern match on whatever
 part of the tree we're looking at, and construct the complementary list:
 
 ``` haskell
-folder EmptyF      = []
-folder (LeafF x)   = [x]
-folder (NodeF l r) = merge l r
+folder Empty      = []
+folder (Leaf x)   = [x]
+folder (Node l r) = merge l r
 ```
 
 Now to sort a list we can just glue these instructions together using
