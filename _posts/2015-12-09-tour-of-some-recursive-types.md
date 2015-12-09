@@ -6,9 +6,12 @@ categories:
   - language-engineering
 ---
 
-(I'm presently at [NIPS](https://nips.cc/) and so felt like writing about some
+(This article is also published at
+[Medium](https://medium.com/@jaredtobin/a-tour-of-some-useful-recursive-types-8fa8e423b5b9))
+
+I'm presently at [NIPS](https://nips.cc/) and so felt like writing about some
 appropriate machine learning topic, but along the way I wound up talking about
-parameterized recursive types, and here we are.  Enjoy!)
+parameterized recursive types, and here we are.  Enjoy!
 
 One starts to see common 'shapes' in algebraic data types after working with
 them for a while.  Take the natural numbers and a standard linked list, for
