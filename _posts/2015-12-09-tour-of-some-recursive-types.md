@@ -122,7 +122,7 @@ data Program f = Running (f (Program f))
 
 Indeed, you can think of 'Fix' as defining a program that runs until 'f'
 decides to terminate.  In turn, you can think of 'f' as an instruction
-set for the program.  The whole shebang of 'Fix f' will only terminate if 'f'
+set for the program.  The whole shebang of 'Fix f' may only terminate if 'f'
 contains a terminating instruction.
 
 Here's a simple set of instructions, for example:
