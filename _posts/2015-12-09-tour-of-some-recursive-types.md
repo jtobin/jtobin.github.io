@@ -371,7 +371,7 @@ terminate :: Program Instruction Int
 terminate = Program 0 Terminate
 ```
 
-Notice that two of these terms uses a helper function 'remaining' that counts
+Notice that two of these terms use a helper function 'remaining' that counts
 the number of instructions left in the program.  It's defined as follows:
 
 ``` haskell
