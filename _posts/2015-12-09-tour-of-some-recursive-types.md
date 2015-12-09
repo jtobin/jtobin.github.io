@@ -221,7 +221,7 @@ notSoInfinite = Free (InfiniteF (Free (InfiniteF (Pure ()))))
 'Pure' branch, but you could pick whatever else you'd like.)
 
 You'll recall that 'InfiniteF' provides no terminating instruction,
-and left to its own devices will just recurse infinitely.
+and left to its own devices will just recurse endlessly.
 
 So: instead of being forced to choose a branch of the underlying functor to
 recurse on, 'Free' can just bail out on a whim and return some value wrapped up
