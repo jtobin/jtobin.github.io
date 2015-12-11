@@ -3,15 +3,15 @@ layout: page
 title: "About"
 ---
 
-I'm a professional engineering, quantitative, and research consultant based out
+I'm a professional quantitative, engineering, and research consultant based out
 of Auckland, New Zealand.
 
 I specialize in:
 
+*  Bayesian statistics / probabilistic machine learning
 *  statically-typed functional programming
 *  data science and numerical algorithms
 *  compilers and language engineering
-*  Bayesian statistics / probabilistic machine learning
 *  asynchronous/remote work
 
 I like to keep my toes dipped in academia and am interested in other fields
