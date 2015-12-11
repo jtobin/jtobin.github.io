@@ -161,7 +161,7 @@ It's worthwhile to review two functions that are useful for working with 'Fix',
 unimaginatively named 'fix' and 'unfix':
 
 ``` haskell
-fix :: f -> Fix f
+fix :: f (Fix f) -> Fix f
 fix = Fix
 
 unfix :: Fix f -> f (Fix f)
@@ -292,7 +292,7 @@ The recursion provided by 'Free' is thus a little less rich than that provided
 by 'Fix'.  With 'Fix' one can *always* project a value out of its recursive
 structure - but that's not the case with 'Free'.
 
-It's well-known that the 'Free' is monadic, and indeed it's usually called the
+It's well-known that 'Free' is monadic, and indeed it's usually called the
 '[free
 monad](http://www.haskellforall.com/2012/06/you-could-have-invented-free-monads.html)'.
 The namesake 'free' comes from an algebraic definition; roughly, a free 'foo'
