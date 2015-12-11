@@ -11,7 +11,7 @@ I specialize in:
 *  statically-typed functional programming
 *  data science and numerical algorithms
 *  compilers and language engineering
-*  Bayesian statistics/machine learning
+*  Bayesian statistics / probabilistic machine learning
 *  asynchronous/remote work
 
 I like to keep my toes dipped in academia and am interested in other fields
