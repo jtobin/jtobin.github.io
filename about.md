@@ -18,6 +18,7 @@ I like to keep my toes dipped in academia and am interested in other fields
 surrounding computation and probability as well.  I enjoy following research
 in:
 
+*  Bayesian nonparametrics
 *  probabilistic programming
 *  theoretical computer science
 *  probability theory
