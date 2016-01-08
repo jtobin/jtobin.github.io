@@ -2,15 +2,14 @@
 layout: post
 title: "Yo Dawg We Heard You Like Derivatives"
 categories:
-  - math
-  - language-engineering
   - haskell
+  - language-engineering
 ---
 
 I noticed [this
 article](http://h2.jaguarpaw.co.uk/posts/symbolic-expressions-can-be-automatically-differentiated/)
 by Tom Ellis today that provides an excellent 'demystified' introduction to
-[automatic differentiation](http://alexey.radul.name/ideas/2013/introduction-to-automatic-differentiation/).  His exposition is exceptionally clear and simple.
+automatic differentiation.  His exposition is exceptionally clear and simple.
 
 Hopefully not in the spirit of re-mystifying things too much, I wanted to
 demonstrate that this kind of forward-mode automatic differentiation can be
