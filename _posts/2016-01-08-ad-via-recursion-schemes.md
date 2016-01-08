@@ -14,8 +14,8 @@ by Tom Ellis today that provides an excellent 'demystified' introduction to
 
 Hopefully not in the spirit of re-mystifying things too much, I wanted to
 demonstrate that this kind of forward-mode automatic differentiation can be
-implemented using a paramorphism, which cleans up the various `let` statements
-found in Tom's version (at the expense of more pattern matching).
+implemented using a catamorphism, which cleans up the various `let` statements
+found in Tom's version (at the expense of slightly more pattern matching).
 
 Let me first duplicate his setup using the standard [recursion
 scheme](http://jtobin.ca/practical-recursion-schemes/) machinery:
