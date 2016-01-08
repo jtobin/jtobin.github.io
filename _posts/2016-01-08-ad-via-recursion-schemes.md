@@ -101,9 +101,9 @@ diff = para $ \case
 Here the primes indicate derivatives in the usual fashion, and the standard
 rules of differentiation are self-explanatory.
 
-For automatic differentiation we just do the same thing, except we're also also
-going to lug around the evaluated function value itself at each point and
-evaluate to doubles instead of other expressions.
+For automatic differentiation we just do sort of the same thing, except we're
+also also going to lug around the evaluated function value itself at each point
+and evaluate to doubles instead of other expressions.
 
 It's worth noting here: why doubles?  Because the expression type that we've
 defined has no notion of sharing, and thus the expressions will blow up à la
@@ -112,23 +112,23 @@ in GHCi).  This could probably be mitigated by [incorporating sharing into the
 embedded language](http://jtobin.ca/sharing-in-haskell-edsls/) in some way, but
 that's a topic for another post.
 
-Anyway, another paramorphism will do the trick:
+Anyway, a catamorphism will do the trick:
 
 ``` haskell
 ad :: Double -> Expr -> (Double, Double)
-ad x = para $ \case
-  VarF                                   -> (x, 1)
-  ZeroF                                  -> (0, 0)
-  OneF                                   -> (1, 0)
-  NegateF (_, (ex, ed))                  -> (negate ex, negate ed)
-  SumF (_, (ex, ed)) (_, (ex', ed'))     -> (ex + ex', ed + ed')
-  ProductF (_, (ex, ed)) (_, (ex', ed')) -> (ex * ex', ex * ed' + ed * ex')
-  ExpF (_, (ex, ed))                     -> (exp ex, exp ex * ed)
+ad x = cata $ \case
+  VarF                     -> (x, 1)
+  ZeroF                    -> (0, 0)
+  OneF                     -> (1, 0)
+  NegateF (x, x')          -> (negate x, negate x')
+  SumF (x, x') (y, y')     -> (x + y, x' + y')
+  ProductF (x, x') (y, y') -> (x * y, x * y' + x' * y)
+  ExpF (x, x')             -> (exp x, exp x * x')
 ```
 
 Take a look at the pairs to the right of the pattern matches; the first element
 in each is just the corresponding term from `eval`, and the second is just the
-corresponding term from `diff` (made 'Double'-friendly).  The paramorphism
+corresponding term from `diff` (made 'Double'-friendly).  The catamorphism
 gives us access to all the terms we need, and we can avoid a lot of work on
 the right-hand side by doing some more pattern matching on the left.
 
@@ -143,21 +143,7 @@ Some sanity checks to make sure that these functions match up with Tom's:
 
 UPDATE:
 
-When glancing at this again I noticed that we don't need a paramorphism to
-implement the `ad` function.  Notice I don't actually use the first element of
-the tuples in the left-hand side pattern matches.  So, a catamorphism will do
-just fine:
-
-``` haskell
-ad :: Double -> Expr -> (Double, Double)
-ad x = cata $ \case
-  VarF                     -> (x, 1)
-  ZeroF                    -> (0, 0)
-  OneF                     -> (1, 0)
-  NegateF (x, x')          -> (negate x, negate x')
-  SumF (x, x') (y, y')     -> (x + y, x' + y')
-  ProductF (x, x') (y, y') -> (x * y, x * y' + x' * y)
-  ExpF (x, x')             -> (exp x, exp x * x')
-```
+I had originally defined `ad` using a paramorphism but noticed that we can get
+by just fine with *cata*.
 
 
