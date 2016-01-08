@@ -10,7 +10,7 @@ categories:
 I noticed [this
 article](http://h2.jaguarpaw.co.uk/posts/symbolic-expressions-can-be-automatically-differentiated/)
 by Tom Ellis today that provides an excellent 'demystified' introduction to
-automatic differentiation.  His exposition is exceptionally clear and simple.
+[automatic differentiation](http://alexey.radul.name/ideas/2013/introduction-to-automatic-differentiation/).  His exposition is exceptionally clear and simple.
 
 Hopefully not in the spirit of re-mystifying things too much, I wanted to
 demonstrate that this kind of forward-mode automatic differentiation can be
@@ -116,7 +116,7 @@ Anyway, another paramorphism will do the trick:
 
 ``` haskell
 ad :: Double -> Expr -> (Double, Double)
-ad x = para  $ \case
+ad x = para $ \case
   VarF                                   -> (x, 1)
   ZeroF                                  -> (0, 0)
   OneF                                   -> (1, 0)
