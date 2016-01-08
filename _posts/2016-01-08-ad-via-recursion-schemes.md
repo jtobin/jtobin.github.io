@@ -151,13 +151,13 @@ just fine:
 ``` haskell
 ad :: Double -> Expr -> (Double, Double)
 ad x = cata $ \case
-  VarF                         -> (x, 1)
-  ZeroF                        -> (0, 0)
-  OneF                         -> (1, 0)
-  NegateF (ex, ed)             -> (negate ex, negate ed)
-  SumF (ex, ed) (ex', ed')     -> (ex + ex', ed + ed')
-  ProductF (ex, ed) (ex', ed') -> (ex * ex', ex * ed' + ed * ex')
-  ExpF (ex, ed)                -> (exp ex, exp ex * ed)
+  VarF                     -> (x, 1)
+  ZeroF                    -> (0, 0)
+  OneF                     -> (1, 0)
+  NegateF (x, x')          -> (negate x, negate x')
+  SumF (x, x') (y, y')     -> (x + y, x' + y')
+  ProductF (x, x') (y, y') -> (x * y, x * y' + x' * y)
+  ExpF (x, x')             -> (exp x, exp x * x')
 ```
 
 
