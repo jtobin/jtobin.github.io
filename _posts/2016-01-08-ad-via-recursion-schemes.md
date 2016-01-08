@@ -141,3 +141,23 @@ Some sanity checks to make sure that these functions match up with Tom's:
 [3.2478565715996756e-6,1.0,1.0100754777229357]
 ```
 
+UPDATE:
+
+When glancing at this again I noticed that we don't need a paramorphism to
+implement the `ad` function.  Notice I don't actually use the first element of
+the tuples in the left-hand side pattern matches.  So, a catamorphism will do
+just fine:
+
+``` haskell
+ad :: Double -> Expr -> (Double, Double)
+ad x = cata $ \case
+  VarF                         -> (x, 1)
+  ZeroF                        -> (0, 0)
+  OneF                         -> (1, 0)
+  NegateF (ex, ed)             -> (negate ex, negate ed)
+  SumF (ex, ed) (ex', ed')     -> (ex + ex', ed + ed')
+  ProductF (ex, ed) (ex', ed') -> (ex * ex', ex * ed' + ed * ex')
+  ExpF (ex, ed)                -> (exp ex, exp ex * ed)
+```
+
+
