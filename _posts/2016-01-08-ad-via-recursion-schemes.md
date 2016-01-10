@@ -81,7 +81,7 @@ eval x = cata $ \case
 Very clear.  We just match things mechanically.
 
 Now, symbolic differentiation.  If you refer to the original `diff` function
-you'll notice that in cases like `Product` or `Expr` there are uses of both an
+you'll notice that in cases like `Product` or `Exp` there are uses of both an
 original expression and also its derivative.  This can be captured simply by a
 paramorphism:
 
