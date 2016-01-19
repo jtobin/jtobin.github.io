@@ -161,9 +161,9 @@ illustrates how insertion sort works:
 
 We'll actually be doing this thing in reverse - starting from the right-hand
 side and scanning left - but here's the inner loop that we'll be concerned
-with: if we're looking at two elements of that are out of sorted order, slide
-the offending element to where it belongs by pushing it to the right until it
-hits either a bigger element or the end of the list.
+with: if we're looking at two elements that are out of sorted order, slide the
+offending element to where it belongs by pushing it to the right until it hits
+either a bigger element or the end of the list.
 
 As an example, picture the following list:
 
