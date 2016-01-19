@@ -4,6 +4,7 @@ title: "Yo Dawg We Heard You Like Derivatives"
 categories:
   - haskell
   - language-engineering
+  - recursion
 ---
 
 I noticed [this

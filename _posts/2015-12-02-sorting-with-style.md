@@ -3,6 +3,7 @@ layout: post
 title: "Sorting with Style"
 categories:
   - haskell
+  - recursion
 ---
 
 [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) is a famous

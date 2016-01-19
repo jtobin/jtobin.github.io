@@ -3,6 +3,7 @@ layout: post
 title: "Practical Recursion Schemes"
 categories:
   - haskell
+  - recursion
 ---
 
 (This article was originally published at [Medium](https://medium.com/@jaredtobin/practical-recursion-schemes-c10648ec1c29))

@@ -232,7 +232,7 @@ can’t really be beat:
 You get the following trace over the Rosenbrock density, taken for 10k
 iterations.  This is using a Metropolis transition with variance 1:
 
-![metropolis](../images/rosenbrock-trace.png)
+![metropolis](/images/rosenbrock-trace.png)
 
 If you do want to work with chains in memory in Haskell you can do that by
 writing your own handling code around the supplied transition operators. I’ll
@@ -290,7 +290,7 @@ constant), we see a chain that has traversed the space a little better:
 > mcmc 5000 [0, 0] transition rosenbrock prng
 ```
 
-![composite](../images/rosenbrock-composite-trace.png)
+![composite](/images/rosenbrock-composite-trace.png)
 
 It’s worth noting that I didn’t put any work into coming up with this composite
 transition: this was just the first example I thought up, and a lot of the

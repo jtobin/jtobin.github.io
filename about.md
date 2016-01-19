@@ -34,5 +34,5 @@ if you might be keen on doing something together.  I'm particularly delighted
 to hear from people who are working on open-source projects or open access
 research.
 
-![Hey.](../images/jtobin-takapuna.jpg "Hey.")
+![Hey.](/images/jtobin-takapuna.jpg "Hey.")
 

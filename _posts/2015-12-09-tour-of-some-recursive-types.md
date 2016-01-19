@@ -3,7 +3,7 @@ layout: post
 title: "A Tour of Some Useful Recursive Types"
 categories:
   - haskell
-  - language-engineering
+  - recursion
 ---
 
 (This article is also published at
