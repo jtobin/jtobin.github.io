@@ -8,7 +8,6 @@ kramdown:
 
 # Permalinks
 permalink:        ':title'
-relative_permalinks: true
 
 # Setup
 title:            jtobin.ca
