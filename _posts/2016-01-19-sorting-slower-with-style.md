@@ -7,8 +7,8 @@ categories:
 ---
 
 I previously wrote about [implementing merge
-sort](http://jtobin.ca/sorting-with-style/) using [recursion
-schemes](http://jtobin.ca/practical-recursion-schemes/).  By using a
+sort](http://jtobin.ca/sorting-with-style) using [recursion
+schemes](http://jtobin.ca/practical-recursion-schemes).  By using a
 hylomorphism we could express the algorithm concisely and true to its
 high-level description.
 

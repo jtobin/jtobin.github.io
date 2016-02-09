@@ -46,7 +46,7 @@ parameterized by some underlying instruction set.
 ## Fix
 
 To start, let's review the famous fixed-point type 'Fix'.  I've talked about it
-[before](http://jtobin.ca/practical-recursion-schemes/), but will go into a bit
+[before](http://jtobin.ca/practical-recursion-schemes), but will go into a bit
 more detail here.
 
 ``` haskell
