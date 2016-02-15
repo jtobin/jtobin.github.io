@@ -7,7 +7,7 @@ categories:
   - language-engineering
 ---
 
-(This article is also published at [Medium](https://medium.com/@jaredtobin/encoding-statistical-independence-statically))
+(This article is also published at [Medium](https://medium.com/@jaredtobin/encoding-statistical-independence-statically-ec6a714cf24a#.9cgzp7fdl))
 
 [Applicative functors](http://strictlypositive.org/IdiomLite.pdf) are useful
 for encoding context-free effects.  This typically gets put to work around
@@ -124,7 +124,7 @@ The 'Model' type wraps up this probability base functor in the free monad,
 'Free'.  In this sense a 'Model' can be viewed as a program parameterized by
 the underlying probabilistic instruction set defined by 'ProbF' (a technique I
 [described
-recently](https://medium.com/@jaredtobin/a-tour-of-some-useful-recursive-types)).
+recently](https://medium.com/@jaredtobin/a-tour-of-some-useful-recursive-types-8fa8e423b5b9)).
 
 Expressions with the type 'Model' are terms in an embedded language.  We can
 create some user-friendly ones for our beta-bernoulli language like so:
@@ -164,12 +164,12 @@ eval = iterM $ \case
 ```
 
 'iterM' is a monadic, catamorphism-like [recursion
-scheme](https://medium.com/@jaredtobin/practical-recursion-schemes) that can be
-used to succinctly consume a 'Model'.  Here I'm using it to propagate
-uncertainty through the model by sampling from it ancestrally in a top-down
-manner.  The 'MWC.beta' and 'MWC.bernoulli' functions are sampling functions
-from the *mwc-probability* library, and the resulting type 'Prob m a' is a
-simple probability monad type based on sampling functions.
+scheme](https://medium.com/@jaredtobin/practical-recursion-schemes-c10648ec1c29)
+that can be used to succinctly consume a 'Model'.  Here I'm using it to
+propagate uncertainty through the model by sampling from it ancestrally in a
+top-down manner.  The 'MWC.beta' and 'MWC.bernoulli' functions are sampling
+functions from the *mwc-probability* library, and the resulting type 'Prob m a'
+is a simple probability monad type based on sampling functions.
 
 To actually sample from the resulting 'Prob' type we can use system's PRNG for
 randomness.  Here are some simple coin tosses with various biases as an
