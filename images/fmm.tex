@@ -1,0 +1,45 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tikzstyle{random}=[circle, minimum size = 10mm, thick, draw = black!80, node distance = 16mm]
+  \tikzstyle{connect}=[-latex, thick]
+  \tikzstyle{plate}=[rectangle, draw = black!100]
+
+  \node[random] (a) { $\alpha$ };
+  \node[random] (p) [below of = a] { $\pi$ };
+  \node[random] (z) [below of = p] { $z_{i}$ };
+  \node[random] (y) [below of = z] { $y_{i}$ };
+  \node[random] (mu) [right of = z] { $\mu_{k}$ };
+  \node[random] (s) [below of = mu] { $s_{k}$ };
+  \node[random] (l) [above of = mu] { $\lambda$ };
+  \node[random] (r) [right of = mu] { $r$ };
+  \node[random] (b) [below of = s] { $\beta$ };
+  \node[random] (w) [right of = s] { $w$ };
+
+  \path (a) edge [connect] (p)
+        (p) edge [connect] (z)
+        (z) edge [connect] (y);
+
+  \path (l) edge [connect] (mu)
+        (mu) edge [connect] (y);
+
+  \path (r) edge [connect] (mu)
+        (mu) edge [connect] (y);
+
+  \path (b) edge [connect] (s)
+        (s) edge [connect] (y);
+
+  \path (w) edge [connect] (s)
+        (s) edge [connect] (y);
+
+  \node[plate, inner sep = 2.0mm, fit = (z) (y)] { };
+  \node[plate, inner sep = 2.0mm, fit = (mu) (s)] { };
+
+\end{tikzpicture}
+
+\end{document}

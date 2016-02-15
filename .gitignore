@@ -43,3 +43,6 @@ files
 _drafts
 
 sandbox
+*aux
+*log
+*pdf
