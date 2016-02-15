@@ -86,10 +86,10 @@ structure is a useful technique for writing and interpreting programs.
 
 Gabriel Gonzalez famously wrote about freeness in an [oft-cited
 article](http://www.haskellforall.com/2012/06/you-could-have-invented-free-monads.html)
-about free monads, John de Goes wrote a compelling piece on the topic in the
+about free monads, John De Goes wrote a compelling piece on the topic in the
 excellent [A Modern Architecture for Functional
 Programming](http://degoes.net/articles/modern-fp/), and just today I noticed
-that Chris Stuccio had published an article on using [Free Boolean
+that Chris Stucchio had published an article on using [Free Boolean
 Algebras](http://engineering.wingify.com/posts/Free-objects/) for implementing
 a kind of constraint DSL.  The last article included the following quote, which
 IMO sums up much of the *raison d'être* to exploit freeness in your day-to-day
