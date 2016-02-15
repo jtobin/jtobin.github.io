@@ -7,6 +7,8 @@ categories:
   - language-engineering
 ---
 
+(This article is also published at [Medium](https://medium.com/@jaredtobin/encoding-statistical-independence-statically))
+
 [Applicative functors](http://strictlypositive.org/IdiomLite.pdf) are useful
 for encoding context-free effects.  This typically gets put to work around
 things like [parsing](https://hackage.haskell.org/package/optparse-applicative)
@@ -165,7 +167,7 @@ eval = iterM $ \case
 scheme](https://medium.com/@jaredtobin/practical-recursion-schemes) that can be
 used to succinctly consume a 'Model'.  Here I'm using it to propagate
 uncertainty through the model by sampling from it ancestrally in a top-down
-manner.  The 'MWC.beta' and 'MWC.bernoulli' functions are samplng functions
+manner.  The 'MWC.beta' and 'MWC.bernoulli' functions are sampling functions
 from the *mwc-probability* library, and the resulting type 'Prob m a' is a
 simple probability monad type based on sampling functions.
 
@@ -232,8 +234,9 @@ guarantee that the coins are truly independent - it's just a mental invariant
 that can't be transferred to an interpreter.
 
 But this is the well-known motivation for applicative functors, so we can do a
-little better here by exploiting them.   Applicatives let use write a
-probabilistic program that can *guarantee* the independence of expressions.
+little better here by exploiting them.   Applicatives are strictly less
+powerful than monads, so they let us write a probabilistic program that can
+*guarantee* the independence of expressions.
 
 Let's bring in the free applicative, 'Ap'.  I'll define a type called 'Sample'
 by layering 'Ap' over our existing 'Model' type:
@@ -242,35 +245,23 @@ by layering 'Ap' over our existing 'Model' type:
 type Sample = Ap Model
 ```
 
-So an expression with type 'Sample' is a free applicative over the 'Model' base
-functor.  I chose the namesake because typically we talk about samples that are
-independent draws from some probability distribution, though we could use 'Ap'
-to collect samples that are independently-but-not-identically distributed as
-well.
+So an expression with type 'Sample' is a free applicative over the 'Model' base functor.  I chose the namesake because typically we talk about samples that are independent draws from some probability distribution, though we could use 'Ap' to collect samples that are independently-but-not-identically distributed as well.
 
-To use our existing embedded language terms with the free applicative, we can
-create the following helper function as an alias for 'liftAp' from
-'Control.Applicative.Free':
+To use our existing embedded language terms with the free applicative, we can create the following helper function as an alias for 'liftAp' from 'Control.Applicative.Free':
 
 ``` haskell
 independent :: f a -> Ap f a
 independent = liftAp
 ```
 
-With that in hand, we can write programs that statically encode independence.
-Here are the two coin flips from earlier (and if you're applicative-savvy I'll
-avoid using 'liftA2' here for clarity):
+With that in hand, we can write programs that statically encode independence.  Here are the two coin flips from earlier (and if you're applicative-savvy I'll avoid using 'liftA2' here for clarity):
 
 ``` haskell
 flips :: Sample (Bool, Bool)
 flips = (,) <$> independent (coin 1 8) <*> independent (coin 8 1)
 ```
 
-The applicative structure enforces exactly what we want: that no part of the
-effectful computation can depend on a previous part of the effectful
-computation.  Or in probability-speak: that the distributions involved do not
-depend on each other in any way (they would be captured by the *plate* notation
-in the visualization shown previously).
+The applicative structure enforces exactly what we want: that no part of the effectful computation can depend on a previous part of the effectful computation.  Or in probability-speak: that the distributions involved do not depend on each other in any way (they would be captured by the *plate* notation in the visualization shown previously).
 
 To wrap up, we can reuse our previous evaluation function to interpret a
 'Sample' into a value with the 'Prob' type:
@@ -289,24 +280,11 @@ And from here it can just be evaluated as before:
 
 ## Conclusion
 
-That applicativeness embodies context-freeness seems to be well-known when it
-comes to parsing, but its relation to independence in probability theory seems
-less so.
+That applicativeness embodies context-freeness seems to be well-known when it comes to parsing, but its relation to independence in probability theory seems less so.
 
-Why might this be useful, you ask?  Because preserving structure is *mandatory*
-for performing inference on probabilistic programs, and it's safe to bet that
-the more structure you can capture, the easier that job will be.
+Why might this be useful, you ask?  Because preserving structure is *mandatory* for performing inference on probabilistic programs, and it's safe to bet that the more structure you can capture, the easier that job will be.
 
-In particular, algorithms for sampling from independent distributions tend to
-be simpler and more efficient than those useful for sampling from dependent
-distributions (where you might want something like [Hamiltonian Monte
-Carlo](https://github.com/jtobin/hasty-hamiltonian) or
-[NUTS](https://github.com/jtobin/hnuts)).  Identifying independent components
-of a probabilistic program statically could thus conceptually simplify the task
-of sampling from some conditioned programs quite a bit - and
-[that](zinkov.com/posts/2012-06-27-why-prob-programming-matters/)
-[matters](https://plus.google.com/u/0/107971134877020469960/posts/KpeRdJKR6Z1).
+In particular, algorithms for sampling from independent distributions tend to be simpler and more efficient than those useful for sampling from dependent distributions (where you might want something like [Hamiltonian Monte Carlo](https://github.com/jtobin/hasty-hamiltonian) or [NUTS](https://github.com/jtobin/hnuts)).  Identifying independent components of a probabilistic program statically could thus conceptually simplify the task of sampling from some conditioned programs quite a bit - and [that](zinkov.com/posts/2012-06-27-why-prob-programming-matters/) [matters](https://plus.google.com/u/0/107971134877020469960/posts/KpeRdJKR6Z1).
 
-Enjoy!  I've dumped the code from this article into a
-[gist](https://gist.github.com/jtobin/f54e2173314ed7a76312).
+Enjoy!  I've dumped the code from this article into a [gist](https://gist.github.com/jtobin/f54e2173314ed7a76312).
 
