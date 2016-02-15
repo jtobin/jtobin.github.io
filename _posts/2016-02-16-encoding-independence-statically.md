@@ -200,9 +200,9 @@ measureEval = iterM $ \case
 
 ## Independence and Applicativeness
 
-So that's all cool stuff.  But in some cases the monadic structure is actually
-more than what we actually require.  Consider flipping two coins and then
-returning them in a pair, for example:
+So that's all cool stuff.  But in some cases the monadic structure is more than
+what we actually require.  Consider flipping two coins and then returning them
+in a pair, for example:
 
 ``` haskell
 flips :: Model (Bool, Bool)
