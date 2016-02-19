@@ -69,11 +69,11 @@ to a monadic program is mechanical: the nodes become monadic expressions and
 the arrows become binds.  You'll see a simple example in this article shortly.
 
 The monadic structure of probability implies that it also has a *functorial*
-structure, of course.  Mapping a function over some probability distrubution
-will transform its support while leaving its probability density structure
-invariant in some sense.  If the function 'uniform' defines a uniform
-probability distribution over the interval (0, 1), then the function 'fmap (+
-1) uniform' will define a probability distribution over the interval (1, 2).
+structure.  Mapping a function over some probability distrubution will
+transform its support while leaving its probability density structure invariant
+in some sense.  If the function 'uniform' defines a uniform probability
+distribution over the interval (0, 1), then the function 'fmap (+ 1) uniform'
+will define a probability distribution over the interval (1, 2).
 
 I'll come back to probability shortly, but the point is that probability
 distributions have a clear and well-defined algebraic structure in terms of
