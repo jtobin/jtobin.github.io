@@ -12,7 +12,7 @@ for ensemble sampling in Haskell and have pushed out a v1.0.0 release.
 # History
 
 I wrote *flat-mcmc* in 2012, and it was the first serious-ish size project I
-attempted in Haskell.  It's an implementation of Goodman \& Weare's [affine
+attempted in Haskell.  It's an implementation of Goodman & Weare's [affine
 invariant ensemble
 sampler](http://msp.org/camcos/2010/5-1/camcos-v5-n1-p04-p.pdf), a Monte Carlo
 algorithm that works by running a Markov chain over an ensemble of particles.
