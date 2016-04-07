@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "*flat-mcmc* Update and v1.0.0 Release"
+title: "flat-mcmc Update and v1.0.0 Release"
 categories:
   - haskell
   - statistics
