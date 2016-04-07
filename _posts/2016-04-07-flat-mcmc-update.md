@@ -17,9 +17,9 @@ invariant ensemble
 sampler](http://msp.org/camcos/2010/5-1/camcos-v5-n1-p04-p.pdf), a Monte Carlo
 algorithm that works by running a Markov chain over an ensemble of particles.
 It's easy to get started with (there are no tuning parameters, etc.) and
-is sufficiently robust for a lot of purposes.  It became somewhat famous in the
-astrostatistics community, where some of its members implemented it via the
-very nice and polished Python library,
+is sufficiently robust for a lot of purposes.  The algorithm became somewhat
+famous in the astrostatistics community, where some of its members implemented
+it via the very nice and polished Python library,
 [emcee](http://dan.iel.fm/emcee/current/).
 
 The library has become my second-most starred repo on Github, with a whopping
