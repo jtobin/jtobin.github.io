@@ -9,7 +9,7 @@ categories:
 I've updated my old [*flat-mcmc*](https://github.com/jtobin/flat-mcmc) library
 for ensemble sampling in Haskell and have pushed out a v1.0.0 release.
 
-# History
+## History
 
 I wrote *flat-mcmc* in 2012, and it was the first serious-ish size project I
 attempted in Haskell.  It's an implementation of Goodman & Weare's [affine
@@ -32,7 +32,7 @@ I'm currently on sabbatical and am traveling through Vietnam; I started the
 rewrite in Hanoi and finished it in Saigon, so it was a kind of nice side
 project to do while sipping coffees and the like during downtime.
 
-# What Is It
+## What Is It
 
 I wrote a little summary of the library in 2012, which you can still find
 [tucked away on my personal site](http://jtobin.ca/flat-mcmc/).  Check that out
@@ -46,7 +46,7 @@ high-dimensional settings.  So caveat emptor, buyer beware and all that.
 In general this is an extremely easy-to-use algorithm that will probably get
 you decent samples from arbitrary targets without tedious tuning/fiddling.
 
-# What's New
+## What's New
 
 I've updated and standardized the API in line with my other MCMC projects
 huddled around the [declarative](http://jtobin.ca/markov-chains-a-la-carte)
