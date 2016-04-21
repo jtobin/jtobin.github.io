@@ -97,7 +97,7 @@ This eliminates the possibility that your customers will make you a certain
 loser by buying elaborate combinations of securities on different outcomes.
 
 There are other rules that your prices must obey as well, but they fall out as
-corollaries of these three.  If you broke any of themm you'd also be breaking
+corollaries of these three.  If you broke any of them you'd also be breaking
 one of these.
 
 It turns out that you *cannot be made a sure loser if, and only if, your prices
