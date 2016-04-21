@@ -6,6 +6,8 @@ categories:
   - statistics
 ---
 
+(This article is also published at [Medium](https://medium.com/@jaredtobin/making-a-market-b4c193512a7e#.zcp63batk))
+
 Suppose you're in the derivatives business.  You are interested in making a
 market on some events; say, whether or not your friend Jay will win tomorrow
 night's poker game, or that the winning pot will be at least USD 100.  Let's
