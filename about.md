@@ -18,10 +18,10 @@ I like to keep my toes dipped in academia and am interested in other fields
 surrounding computation and probability as well.  I enjoy following research
 in:
 
+*  algorithmic game theory
 *  Bayesian nonparametrics
 *  probabilistic programming
 *  theoretical computer science
-*  probability theory
 
 I try to at least attend [NIPS](https://nips.cc) and
 [ICFP](http://http://icfpconference.org/) annually, so feel free to say hello
