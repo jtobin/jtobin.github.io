@@ -12,11 +12,13 @@ best:
 > becomes amazingly more alive when used in probability, not only because it is
 > then applied, but also because it is immensely enriched.
 
-What does it mean for something to be *measurable* in the mathematical sense?
-Take some arbitrary collection $$X$$ and slap an appropriate algebraic
-structure $$\mathcal{X}$$ on it - usually an [algebra][algebra-wiki] or
-[$$\sigma$$-algebra][sa-wiki], etc.  Then we can refer to a few different
-objects as 'measurable', going roughly as follows.
+Unfortunately for you, dear reader, we won't be talking about probability.
+
+Moving on.  What does it mean for something to be *measurable* in the
+mathematical sense?  Take some arbitrary collection $$X$$ and slap an
+appropriate algebraic structure $$\mathcal{X}$$ on it - usually an
+[algebra][algebra-wiki] or [$$\sigma$$-algebra][sa-wiki], etc.  Then we can
+refer to a few different objects as 'measurable', going roughly as follows.
 
 The elements of the structure $$\mathcal{X}$$ are called *measurable sets*.
 They're called this because they can literally be assigned a notion of measure
