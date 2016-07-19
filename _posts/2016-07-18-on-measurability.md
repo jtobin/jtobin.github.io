@@ -5,11 +5,12 @@ categories:
   - mathematics
 ---
 
+.. this one is pretty dry, I'll admit.  [David Williams][williams] said it
+best:
+
 > .. Measure theory, that most arid of subjects when done for its own sake,
 > becomes amazingly more alive when used in probability, not only because it is
 > then applied, but also because it is immensely enriched.
->
-> -- [David Williams][williams]
 
 What does it mean for something to be *measurable* in the mathematical sense?
 Take some arbitrary collection $$X$$ and slap an appropriate algebraic
