@@ -171,8 +171,8 @@ top-down manner.  The 'MWC.beta' and 'MWC.bernoulli' functions are sampling
 functions from the *mwc-probability* library, and the resulting type 'Prob m a'
 is a simple probability monad type based on sampling functions.
 
-To actually sample from the resulting 'Prob' type we can use system's PRNG for
-randomness.  Here are some simple coin tosses with various biases as an
+To actually sample from the resulting 'Prob' type we can use the system's PRNG
+for randomness.  Here are some simple coin tosses with various biases as an
 example; you can mentally substitute 'Head' for 'True' if you'd like:
 
 ```
@@ -307,7 +307,7 @@ Carlo](https://github.com/jtobin/hasty-hamiltonian) or
 [NUTS](https://github.com/jtobin/hnuts)).  Identifying independent components
 of a probabilistic program statically could thus conceptually simplify the task
 of sampling from some conditioned programs quite a bit - and
-[that](zinkov.com/posts/2012-06-27-why-prob-programming-matters/)
+[that](http://zinkov.com/posts/2012-06-27-why-prob-programming-matters/)
 [matters](https://plus.google.com/u/0/107971134877020469960/posts/KpeRdJKR6Z1).
 
 Enjoy!  I've dumped the code from this article into a
