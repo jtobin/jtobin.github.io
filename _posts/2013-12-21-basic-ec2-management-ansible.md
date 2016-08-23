@@ -231,5 +231,5 @@ Voila, three servers ready to roll.  Great stuff.
 
 To fill the missing details, you might want to check out the excellent [Ansible
 documentation](http://www.ansibleworks.com/docs/), as well as the great
-tutorials at [AnswersForAws](http://http://answersforaws.com/).
+tutorials at [AnswersForAws](http://answersforaws.com/).
 
