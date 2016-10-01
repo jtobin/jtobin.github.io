@@ -470,10 +470,8 @@ stroll over the one defined by the following function:
 
 ```
 landscape :: [Double] -> Double
-landscape xs = -0.5 * (x0 ^ 2 * x1 ^ 2 + x0 ^ 2 + x1 ^ 2 - 8 * x0 - 8 * x1)
-  where
-    x0 = xs !! 0
-    x1 = xs !! 1
+landscape [x0, x1] =
+  -0.5 * (x0 ^ 2 * x1 ^ 2 + x0 ^ 2 + x1 ^ 2 - 8 * x0 - 8 * x1)
 ```
 
 What we'll now do is pick an origin to start from, wander over the landscape
