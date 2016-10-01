@@ -113,7 +113,7 @@ experience, and there is likely some conceptual weirdness to be found here.
 Just as *histo* gives you access to previously-computed values, *futu* gives
 you access to values that the recursion will compute in the future.
 
-![wat](images/lions-wat.gif "wat")
+![wat](/images/lions-wat.gif "wat")
 
 So yeah, that sounds crazy.  But the reality is more mundane, if you're
 familiar with the underlying concepts.
