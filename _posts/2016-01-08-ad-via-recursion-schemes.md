@@ -18,7 +18,7 @@ implemented using a catamorphism, which cleans up the various `let` statements
 found in Tom's version (at the expense of slightly more pattern matching).
 
 Let me first duplicate his setup using the standard [recursion
-scheme](http://jtobin.ca/practical-recursion-schemes) machinery:
+scheme](practical-recursion-schemes) machinery:
 
 ``` haskell
 {-# LANGUAGE DeriveFunctor #-}
@@ -109,8 +109,8 @@ It's worth noting here: why doubles?  Because the expression type that we've
 defined has no notion of sharing, and thus the expressions will blow up à la
 `diff` (to see what I mean, try printing the analogue of `diff bigExpression`
 in GHCi).  This could probably be mitigated by [incorporating sharing into the
-embedded language](http://jtobin.ca/sharing-in-haskell-edsls) in some way, but
-that's a topic for another post.
+embedded language](sharing-in-haskell-edsls) in some way, but that's a topic
+for another post.
 
 Anyway, a catamorphism will do the trick:
 

@@ -157,7 +157,7 @@ You’ll want to supply a target to sample over, and if you want to use an
 algorithm like Hamiltonian Monte Carlo you’ll also need to provide a gradient.
 If you can’t be bothered to calculate gradients by hand, you can always turn to
 your friend [automatic
-differentiation](http://jtobin.ca/automasymbolic-differentiation):
+differentiation](automasymbolic-differentiation):
 
 ``` haskell
 import Numeric.AD

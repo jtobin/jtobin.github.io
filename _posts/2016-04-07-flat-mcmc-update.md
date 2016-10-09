@@ -49,10 +49,10 @@ you decent samples from arbitrary targets without tedious tuning/fiddling.
 ## What's New
 
 I've updated and standardized the API in line with my other MCMC projects
-huddled around the [declarative](http://jtobin.ca/markov-chains-a-la-carte)
-library.  That means that, like the others, there are two primary ways to use
-the library: via an `mcmc` function that will print a trace to stdout, or a
-`flat` transition operator that can be used to work with chains in memory.
+huddled around the [declarative](markov-chains-a-la-carte) library.  That means
+that, like the others, there are two primary ways to use the library: via an
+`mcmc` function that will print a trace to stdout, or a `flat` transition
+operator that can be used to work with chains in memory.
 
 Regrettably you can't use the `flat` transition operator with others in the
 `declarative` ecosystem as it operates over *ensembles*, whereas the others are

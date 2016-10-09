@@ -6,11 +6,9 @@ categories:
   - recursion
 ---
 
-I previously wrote about [implementing merge
-sort](http://jtobin.ca/sorting-with-style) using [recursion
-schemes](http://jtobin.ca/practical-recursion-schemes).  By using a
-hylomorphism we could express the algorithm concisely and true to its
-high-level description.
+I previously wrote about [implementing merge sort](sorting-with-style) using
+[recursion schemes](practical-recursion-schemes).  By using a hylomorphism we
+could express the algorithm concisely and true to its high-level description.
 
 [Insertion sort](https://en.wikipedia.org/wiki/Insertion_sort) can be
 implemented in a similar way - this time by putting one recursion scheme inside

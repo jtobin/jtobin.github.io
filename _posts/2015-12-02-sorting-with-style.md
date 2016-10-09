@@ -14,7 +14,7 @@ reconstruct the (now sorted) original.
 
 A clear implementation of mergesort should by definition be as faithful to that
 high-level description as possible.  We can get pretty close to that using the
-whole [recursion schemes](http://jtobin.ca/practical-recursion-schemes)
+whole [recursion schemes](practical-recursion-schemes)
 business that I've talked about in the past.  Near the end of that article I
 briefly mentioned the idea of implementing mergesort via a
 [hylomorphism](https://en.wikipedia.org/wiki/Hylomorphism_(computer_science)),

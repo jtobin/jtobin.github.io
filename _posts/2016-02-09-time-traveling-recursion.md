@@ -32,10 +32,10 @@ recursive types that are useful for encoding programs defined by some
 underlying instruction set.
 
 I've also posted a couple of minor notes - I described the *apo* scheme in
-[Sorting Slower With Style](http://jtobin.ca/sorting-slower-with-style) (as
-well as how to use *recursion-schemes* with regular Haskell lists) and chatted
-about monadic versions of the various schemes in [Monadic Recursion
-Schemes](http://jtobin.ca/monadic-recursion-schemes).
+[Sorting Slower With Style](sorting-slower-with-style) (as well as how to use
+*recursion-schemes* with regular Haskell lists) and chatted about monadic
+versions of the various schemes in [Monadic Recursion
+Schemes](monadic-recursion-schemes).
 
 Here I want to clue up this whole recursion series by briefly talking about two
 other recursion schemes - *histo* and *futu* - that work by looking at the past
