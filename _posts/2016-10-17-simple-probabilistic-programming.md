@@ -75,7 +75,7 @@ binomial n p = fmap count coins where
   count = length . filter id
   coins = replicateM n (bernoulli p)
 
-betaBinomial :: Int -> Double -> Doublt -> Model Int
+betaBinomial :: Int -> Double -> Double -> Model Int
 betaBinomial n a b = do
   p <- beta a b
   binomial n p
