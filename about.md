@@ -23,16 +23,15 @@ in:
 *  probabilistic programming
 *  theoretical computer science
 
-I try to at least attend [NIPS](https://nips.cc) and
-[ICFP](http://http://icfpconference.org/) annually, so feel free to say hello
-if you see me there.
+I try to attend some subset of [NIPS](https://nips.cc),
+[ICFP](http://icfpconference.org/), and
+[EC](http://www.sigecom.org/ec16/index.html) annually, so say hello if you see
+me and we can go grab a coffee.
 
 I've been involved in a number of senior- and principal-level engineering,
 research, and data science positions and am always happy to hear from people
 doing interesting things.  Feel free to [get in touch](mailto:jared@jtobin.ca)
-if you might be keen on doing something together.  I'm particularly delighted
-to hear from people who are working on open-source projects or open access
-research.
+if you might be keen on doing something together.
 
 ![Hey.](/images/jtobin-takapuna.jpg "Hey.")
 

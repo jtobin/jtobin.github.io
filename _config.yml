@@ -11,8 +11,8 @@ kramdown:
 permalink:        ':title'
 
 # Setup
-title:            jtobin.io
-url:              http://jtobin.io
+title:            jtobin.ca
+url:              http://jtobin.ca
 baseurl:          /
 
 author:
