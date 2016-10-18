@@ -186,7 +186,7 @@ Let's grab some samples from the posterior distribution:
 
 The central tendency of the posterior floats about 0.75, which is what we'd
 expect, given our observations.  This has been inferred from only four
-point; let's try adding a few more.  But before we do that, note that the
+points; let's try adding a few more.  But before we do that, note that the
 present way the rejection sampling algorithm works is:
 
 * Propose a parameter value according to the supplied proposal distribution.
