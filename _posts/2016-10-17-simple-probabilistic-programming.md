@@ -259,8 +259,8 @@ language hacking.  It sort of demands you're a fan of all these higher-kinded
 types and structured recursions and all that, but if you're reading this blog
 then you're probably in that camp anyway.
 
-I'll probably write a few more little articles like this this over time.  There
-are a ton of improvements that we can make to this basic setup - encoding
+I'll probably write a few more little articles like this over time.  There are
+a ton of improvements that we can make to this basic setup - encoding
 [independence][indp], sampling via [MCMC][mcmc], etc. - and it might be fun to
 grow everything out piece by piece.
 
