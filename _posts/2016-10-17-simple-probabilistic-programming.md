@@ -148,8 +148,8 @@ general case the problem is actually *unsolvable*, in that one can encode as a
 probabilistic program a conditional distribution that computes the halting
 problem.  Similarly, in general it's impossible to do this sort of thing
 *efficiently* even for computable conditional distributions.  Consider the case
-of a program that returns the hash of a random binary string of length $n$, and
-then try to infer the distribution over strings given some hashes, for example.
+of a program that returns the hash of a random n-long binary string, and then
+try to infer the distribution over strings given some hashes, for example.
 This is never going to be a tractable problem.
 
 For now let's use a simple [rejection sampler][rejs] to encode a conditional
