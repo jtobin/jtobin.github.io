@@ -7,6 +7,8 @@ categories:
   - haskell
 ---
 
+(This article is also published at [Medium][medi])
+
 What does a dead-simple embedded probabilistic programming language look like?
 The simplest thing I can imagine involves three components:
 
@@ -280,3 +282,4 @@ I've dropped the code from this post into [this gist][gist].
 [resc]: https://medium.com/@jaredtobin/practical-recursion-schemes-c10648ec1c29#.cxi40ue4i
 [indp]: https://medium.com/@jaredtobin/encoding-statistical-independence-statically-ec6a714cf24a#.l9odf3a3k
 [mcmc]: https://medium.com/@jaredtobin/markov-chains-a-la-carte-3fc40df45592#.ckss58vd4
+[medi]: https://medium.com/@jaredtobin/a-simple-embedded-probabilistic-programming-language-17bdaa08ed99#.dl2lt6cre
