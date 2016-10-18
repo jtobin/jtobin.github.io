@@ -9,8 +9,8 @@ categories:
 
 (This article is also published at [Medium][medi])
 
-What does a dead-simple embedded probabilistic programming language look like?
-The simplest thing I can imagine involves three components:
+What does a dead-simple probabilistic programming language look like?  The
+simplest thing I can imagine involves three components:
 
 * A representation for probabilistic models.
 * A way to simulate from those models ('forward' sampling).
@@ -57,10 +57,10 @@ as a constructor of the `ModelF` type.   You can think of them as probabilistic
 [instructions][turt], in a sense.  A `Model` itself is a program parameterized
 by this probabilistic instruction set.
 
-In a bigger implementation you'd probably want to add more primitives, but you
-can get pretty far with the beta and Bernoulli distributions alone.  Here are
-some embedded language terms, only two of which correspond one-to-one with to
-the constructors themselves:
+In a more sophisticated implementation you'd probably want to add more
+primitives, but you can get pretty far with the beta and Bernoulli
+distributions alone.  Here are some embedded language terms, only two of which
+correspond one-to-one with to the constructors themselves:
 
 ``` haskell
 bernoulli :: Double -> Model Bool
@@ -83,13 +83,13 @@ betaBinomial n a b = do
   binomial n p
 ```
 
-You can build a lot of useful distributions by just starting from the beta and
-Bernoulli as well.  And technically I guess the more foundational distributions
-to use here would be the [Dirichlet][diri] and [categorical][cate], of which
-the beta and Bernoulli are special cases.  But I digress.  The point is that
-other distributions are easy to construct from a set of reliable primitives;
-you can check out the old [lambda-naught][park] paper by Park et al for more
-examples.
+You can build a lot of other useful distributions by just starting from the
+beta and Bernoulli as well.  And technically I guess the more foundational
+distributions to use here would be the [Dirichlet][diri] and
+[categorical][cate], of which the beta and Bernoulli are special cases.  But I
+digress.  The point is that other distributions are easy to construct from a
+set of reliable primitives; you can check out the old [lambda-naught][park]
+paper by Park et al for more examples.
 
 See how `binomial` and `betaBinomial` are defined?  In the case of `binomial`
 we're using the property that models have a *functorial* structure by just
@@ -209,10 +209,9 @@ this case:
 invertWithAssistance
   :: (Monad m, Eq c) => ([a] -> c) -> m b -> (b -> m a) -> [a] -> m b
 invertWithAssistance assister proposal model observed = loop where
-  len  = length observed
   loop = do
     parameters <- proposal
-    generated  <- replicateM len (model parameters)
+    generated  <- replicateM (length observed) (model parameters)
     if   assister generated == assister observed
     then return parameters
     else loop
@@ -255,11 +254,12 @@ This is a really basic formulation - too basic to be useful in any meaningful
 way - but it illustrates some of the most important concepts in probabilistic
 programming.  Representation, simulation, and inference.
 
-I think it's also particularly nice to do this in Haskell, rather than Python -
-it provides us with a lot of extensible structure in a familiar framework for
-language hacking.  It sort of demands you're a fan of all these higher-kinded
-types and structured recursions and all that, but if you're reading this blog
-then you're probably in that camp anyway.
+I think it's also particularly nice to do this in Haskell, rather than something
+like Python (which Dan used in his talk) - it provides us with a lot of
+extensible structure in a familiar framework for language hacking.  It sort of
+demands you're a fan of all these higher-kinded types and structured recursions
+and all that, but if you're reading this blog then you're probably in that camp
+anyway.
 
 I'll probably write a few more little articles like this over time.  There are
 a ton of improvements that we can make to this basic setup - encoding
