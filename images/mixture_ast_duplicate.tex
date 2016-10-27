@@ -1,0 +1,201 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+
+\newcommand{\statenoderight}[3][1]{
+  \tikzstyle{state}=[rectangle, minimum size = 10mm, draw = black!80, node distance = 20mm]
+  \tikzstyle{connect}=[-latex, thick]
+  \node[state, scale=#1] (#2) [above of = #3, right of =#3] { \textrm{Node} };
+}
+
+\newcommand{\statenodeleft}[3][1]{
+  \tikzstyle{state}=[rectangle, minimum size = 10mm, draw = black!80, node distance = 20mm]
+  \tikzstyle{connect}=[-latex, thick]
+  \node[state, scale=#1] (#2) [above of = #3, left of =#3] { \textrm{Node} };
+}
+
+\newcommand{\syntaxTreeBeta}[3][1]{
+  \node[scale=#1, node distance = 70mm] (#2) [above of = #3, left of = #3] {
+    \begin{tikzpicture}
+      \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+      \tikzstyle{connect}=[-latex, thick]
+
+      \node[random] (stBetaBeta) { \textrm{BetaF} };
+      \node[random] (stBetaBernoulli) [below of = stBetaBeta] { \textrm{BernoulliF} };
+      \node[random] (stBetaGauss0) [below of = stBetaBernoulli] { \textrm{NormalF} };
+      \node[random] (stBetaGauss1) [below of = stBetaBernoulli, right of = stBetaBernoulli] { \textrm{NormalF} };
+      \node[random] (stBetaDirac0) [below of = stBetaGauss0] { \textrm{DiracF} };
+      \node[random] (stBetaDirac1) [below of = stBetaGauss1] { \textrm{DiracF} };
+
+      \statenodeleft[0.8]{stBetaNodeBeta}{stBetaBeta};
+      \statenodeleft[0.8]{stBetaNodeBernoulli}{stBetaBernoulli};
+      \statenodeleft[0.8]{stBetaNodeGauss0}{stBetaGauss0};
+      \statenodeleft[0.8]{stBetaNodeDirac0}{stBetaDirac0};
+      \statenoderight[0.8]{stBetaNodeGauss1}{stBetaGauss1};
+      \statenoderight[0.8]{stBetaNodeDirac1}{stBetaDirac1};
+
+      \path (stBetaBeta) edge [connect] (stBetaBernoulli)
+            (stBetaBeta) edge (stBetaNodeBeta)
+
+            (stBetaBernoulli) edge [connect] (stBetaGauss0)
+            (stBetaBernoulli) edge (stBetaNodeBernoulli)
+            (stBetaBernoulli) edge [connect] (stBetaGauss1)
+
+            (stBetaGauss0) edge [connect] (stBetaDirac0)
+            (stBetaGauss0) edge (stBetaNodeGauss0)
+            (stBetaGauss1) edge [connect] (stBetaDirac1)
+            (stBetaGauss1) edge (stBetaNodeGauss1)
+
+            (stBetaDirac0) edge (stBetaNodeDirac0)
+            (stBetaDirac1) edge (stBetaNodeDirac1);
+    \end{tikzpicture}
+  };
+}
+
+\newcommand{\syntaxTreeBernoulli}[3][1]{
+  \node[scale=#1, node distance = 70mm] (#2) [above of = #3, left of = #3] {
+    \begin{tikzpicture}
+      \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+      \tikzstyle{connect}=[-latex, thick]
+
+      \node[random] (stBernoulliBernoulli) { \textrm{BernoulliF} };
+      \node[random] (stBernoulliGauss0) [below of = stBernoulliBernoulli] { \textrm{NormalF} };
+      \node[random] (stBernoulliGauss1) [below of = stBernoulliBernoulli, right of = stBernoulliBernoulli] { \textrm{NormalF} };
+      \node[random] (stBernoulliDirac0) [below of = stBernoulliGauss0] { \textrm{DiracF} };
+      \node[random] (stBernoulliDirac1) [below of = stBernoulliGauss1] { \textrm{DiracF} };
+
+      \statenodeleft[0.8]{stBernoulliNodeBernoulli}{stBernoulliBernoulli};
+      \statenodeleft[0.8]{stBernoulliNodeGauss0}{stBernoulliGauss0};
+      \statenodeleft[0.8]{stBernoulliNodeDirac0}{stBernoulliDirac0};
+      \statenoderight[0.8]{stBernoulliNodeGauss1}{stBernoulliGauss1};
+      \statenoderight[0.8]{stBernoulliNodeDirac1}{stBernoulliDirac1};
+
+      \path (stBernoulliBernoulli) edge [connect] (stBernoulliGauss0)
+            (stBernoulliBernoulli) edge (stBernoulliNodeBernoulli)
+            (stBernoulliBernoulli) edge [connect] (stBernoulliGauss1)
+
+            (stBernoulliGauss0) edge [connect] (stBernoulliDirac0)
+            (stBernoulliGauss0) edge (stBernoulliNodeGauss0)
+            (stBernoulliGauss1) edge [connect] (stBernoulliDirac1)
+            (stBernoulliGauss1) edge (stBernoulliNodeGauss1)
+
+            (stBernoulliDirac0) edge (stBernoulliNodeDirac0)
+            (stBernoulliDirac1) edge (stBernoulliNodeDirac1);
+    \end{tikzpicture}
+  };
+}
+
+\newcommand{\syntaxTreeGaussZero}[3][1]{
+  \node[scale=#1, node distance = 70mm] (#2) [above of = #3, left of = #3] {
+    \begin{tikzpicture}
+      \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+      \tikzstyle{connect}=[-latex, thick]
+
+      \node[random] (stBernoulliGauss0) { \textrm{NormalF} };
+      \node[random] (stBernoulliDirac0) [below of = stBernoulliGauss0] { \textrm{DiracF} };
+
+      \statenodeleft[0.8]{stBernoulliNodeGauss0}{stBernoulliGauss0};
+      \statenodeleft[0.8]{stBernoulliNodeDirac0}{stBernoulliDirac0};
+
+      \path (stBernoulliGauss0) edge [connect] (stBernoulliDirac0)
+            (stBernoulliGauss0) edge (stBernoulliNodeGauss0)
+            (stBernoulliDirac0) edge (stBernoulliNodeDirac0);
+
+    \end{tikzpicture}
+  };
+}
+
+\newcommand{\syntaxTreeGaussOne}[3][1]{
+  \node[scale=#1, node distance = 70mm] (#2) [above of = #3, right of = #3] {
+    \begin{tikzpicture}
+      \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+      \tikzstyle{connect}=[-latex, thick]
+
+      \node[random] (stBernoulliGauss1) { \textrm{NormalF} };
+      \node[random] (stBernoulliDirac1) [below of = stBernoulliGauss1] { \textrm{DiracF} };
+
+      \statenoderight[0.8]{stBernoulliNodeGauss1}{stBernoulliGauss1};
+      \statenoderight[0.8]{stBernoulliNodeDirac1}{stBernoulliDirac1};
+
+      \path (stBernoulliGauss1) edge [connect] (stBernoulliDirac1)
+            (stBernoulliGauss1) edge (stBernoulliNodeGauss1)
+            (stBernoulliDirac1) edge (stBernoulliNodeDirac1);
+
+    \end{tikzpicture}
+  };
+}
+
+\newcommand{\syntaxTreeDiracOne}[3][1]{
+  \node[scale=#1, node distance = 70mm] (#2) [above of = #3, right of = #3] {
+    \begin{tikzpicture}
+      \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+      \tikzstyle{connect}=[-latex, thick]
+
+      \node[random] (stBernoulliDirac1) { \textrm{DiracF} };
+
+      \statenoderight[0.8]{stBernoulliNodeDirac1}{stBernoulliDirac1};
+
+      \path (stBernoulliDirac1) edge (stBernoulliNodeDirac1);
+
+    \end{tikzpicture}
+  };
+}
+
+\newcommand{\syntaxTreeDiracZero}[3][1]{
+  \node[scale=#1, node distance = 70mm] (#2) [above of = #3, left of = #3] {
+    \begin{tikzpicture}
+      \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+      \tikzstyle{connect}=[-latex, thick]
+
+      \node[random] (stBernoulliDirac0) { \textrm{DiracF} };
+
+      \statenodeleft[0.8]{stBernoulliNodeDirac0}{stBernoulliDirac0};
+
+      \path (stBernoulliDirac0) edge (stBernoulliNodeDirac0);
+
+    \end{tikzpicture}
+  };
+}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+  \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+  \tikzstyle{connect}=[-latex, thick]
+
+  \node[random] (beta) { \textrm{BetaF} };
+  \node[random] (bernoulli) [below of = beta] { \textrm{BernoulliF} };
+  \node[random] (gauss0) [below of = bernoulli] { \textrm{NormalF} };
+  \node[random] (gauss1) [below of = bernoulli, right of = bernoulli] { \textrm{NormalF} };
+  \node[random] (dirac0) [below of = gauss0] { \textrm{DiracF} };
+  \node[random] (dirac1) [below of = gauss1] { \textrm{DiracF} };
+
+  \syntaxTreeBeta[0.25]{stBeta}{beta}
+  \syntaxTreeBernoulli[0.25]{stBernoulli}{bernoulli}
+  \syntaxTreeGaussZero[0.25]{stGaussZero}{gauss0}
+  \syntaxTreeGaussOne[0.25]{stGaussOne}{gauss1}
+  \syntaxTreeDiracZero[0.25]{stDiracZero}{dirac0}
+  \syntaxTreeDiracOne[0.25]{stDiracOne}{dirac1}
+
+  \path (beta) edge [connect] (bernoulli)
+        (bernoulli) edge [connect] (gauss0)
+        (bernoulli) edge [connect] (gauss1)
+        (gauss0) edge [connect] (dirac0)
+        (gauss1) edge [connect] (dirac1)
+
+        (beta) edge (stBeta)
+        (bernoulli) edge (stBernoulli)
+
+        (gauss0) edge (stGaussZero)
+        (gauss1) edge (stGaussOne)
+
+        (dirac0) edge (stDiracZero)
+        (dirac1) edge (stDiracOne);
+
+\end{tikzpicture}
+
+\end{document}

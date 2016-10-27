@@ -1,0 +1,59 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+
+\begin{document}
+
+\newcommand{\statenoderight}[3][1]{
+  \tikzstyle{state}=[rectangle, minimum size = 10mm, draw = black!80, node distance = 20mm]
+  \tikzstyle{connect}=[-latex, thick]
+  \node[state, scale=#1] (#2) [above of = #3, right of =#3] { \textrm{Node} };
+}
+
+\newcommand{\statenodeleft}[3][1]{
+  \tikzstyle{state}=[rectangle, minimum size = 10mm, draw = black!80, node distance = 20mm]
+  \tikzstyle{connect}=[-latex, thick]
+  \node[state, scale=#1] (#2) [above of = #3, left of =#3] { \textrm{Node} };
+}
+
+\begin{tikzpicture}
+
+  \tikzstyle{random}=[circle, minimum size = 20mm, thick, draw = black!80, node distance = 30mm]
+  \tikzstyle{connect}=[-latex, thick]
+
+  \node[random] (beta) { \textrm{BetaF} };
+  \node[random] (bernoulli) [below of = beta] { \textrm{BernoulliF} };
+  \node[random] (gauss0) [below of = bernoulli] { \textrm{NormalF} };
+  \node[random] (gauss1) [below of = bernoulli, right of = bernoulli] { \textrm{NormalF} };
+  \node[random] (dirac0) [below of = gauss0] { \textrm{DiracF} };
+  \node[random] (dirac1) [below of = gauss1] { \textrm{DiracF} };
+
+  \statenodeleft[0.8]{nodeBeta}{beta};
+  \statenodeleft[0.8]{nodeBernoulli}{bernoulli};
+  \statenodeleft[0.8]{nodeGauss0}{gauss0};
+  \statenodeleft[0.8]{nodeDirac0}{dirac0};
+  \statenoderight[0.8]{nodeGauss1}{gauss1};
+  \statenoderight[0.8]{nodeDirac1}{dirac1};
+
+  \path (beta) edge [connect] (bernoulli)
+        (beta) edge (nodeBeta)
+
+        (bernoulli) edge [connect] (gauss0)
+        (bernoulli) edge (nodeBernoulli)
+        (bernoulli) edge [connect] (gauss1)
+
+        (gauss0) edge [connect] (dirac0)
+        (gauss0) edge (nodeGauss0)
+        (gauss1) edge [connect] (dirac1)
+        (gauss1) edge (nodeGauss1)
+
+        (dirac0) edge (nodeDirac0)
+        (dirac1) edge (nodeDirac1);
+
+
+\end{tikzpicture}
+
+\end{document}

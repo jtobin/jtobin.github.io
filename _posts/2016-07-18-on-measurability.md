@@ -21,11 +21,11 @@ appropriate algebraic structure $$\mathcal{X}$$ on it - usually an
 refer to a few different objects as 'measurable', going roughly as follows.
 
 The elements of the structure $$\mathcal{X}$$ are called *measurable sets*.
-They're called this because they can literally be assigned a notion of measure
-- a kind of generalized volume.  If we're just talking about some subset of
-$$X$$ out of the context of its structure then we can be pedantic and call it
-measurable *with respect to* $$\mathcal{X}$$, say.  You could also call a set
-$$\mathcal{X}$$-measurable, to be similarly precise.
+They're called this because they can literally be assigned a notion of measure,
+whcih is a kind of generalized volume.  If we're just talking about some subset
+of $$X$$ out of the context of its structure then we can be pedantic and call
+it measurable *with respect to* $$\mathcal{X}$$, say.  You could also call a
+set $$\mathcal{X}$$-measurable, to be similarly precise.
 
 The product of the original collection and its associated structure $$(X,
 \mathcal{X})$$ is called a *measurable space*.  It's called that because it can

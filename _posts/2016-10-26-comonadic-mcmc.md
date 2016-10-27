@@ -2,18 +2,27 @@
 layout: post
 title: "Comonadic Markov Chain Monte Carlo"
 categories:
-  - haskell
   - probabilistic-programming
   - language-engineering
+  - haskell
 ---
 
-(This article is also published at [Medium][medi])
-
-Some time ago I came across a way to *in-principle* perform inference on
-certain probabilistic programs using comonadic structures and operations.  I
-decided to dig it up and use it to extend the [simple probabilistic programming
+Some time ago I came across a way to in-principle perform inference on certain
+probabilistic programs using comonadic structures and operations.  I decided to
+dig it up and try to use it to extend the [simple probabilistic programming
 language][sppl] I talked about a few days ago with a stateful, experimental
-inference backend.  Enjoy!
+inference backend.
+
+In this post we'll
+
+* Represent probabilistic programs as recursive types parameterized by
+  a terminating instruction set.
+* Represent execution traces of probabilistic programs via a simple
+  transformation of our program representation.
+* Implement the Metropolis-Hastings algorithm over this space of execution
+  traces and thus do some inference.
+
+Let's get started!
 
 ## Representing Programs That Terminate
 
@@ -34,8 +43,17 @@ data ModelF r =
 ```
 
 We then created an embedded language by just wrapping it up in the
-higher-kinded `Free` type to denote programs of type `Model`.  Recall that
-`Free` represents programs that can *terminate*, either by some underlying
+higher-kinded `Free` type to denote programs of type `Model`.
+
+``` haskell
+data Free f a =
+    Pure a
+  | Free (f (Free f a))
+
+type Model = Free ModelF
+```
+
+Recall that `Free` represents programs that can *terminate*, either by some
 instruction in the underlying instruction set, or via the `Pure` constructor of
 the `Free` type itself.  The language defined by `Free ModelF` is expressive
 enough to easily construct a 'forward-sampling' interpreter, as well as a
@@ -131,7 +149,7 @@ type Model b = forall a. Program a b
 defined via `data Void = Void Void`.  Any program that ends via a `dirac`
 instruction *must* be `Terminating`, and any program that *doesn't* end with a
 `dirac` instruction *can not* be `Terminating`.  We'll just continue to call
-a nonterminating program a `Model`, like before.
+a nonterminating program a `Model`, as before.
 
 Good.  So if it's not clear: from a user's perspective, nothing has changed.
 We still write probabilistic programs using simple monadic language terms.
@@ -148,9 +166,21 @@ mixture a b = do
   else normal 2 0.5
 ```
 
+Meanwhile the syntax tree generated looks something like the following.  It's
+more or less a traditional probabilistic graphical model description of our
+program:
+
+![](/images/mixture_ast.png){: .center-image }
+
+It's important to note that in this embedded framework, the only pieces of the
+syntax tree that we can observe are those related directly to our primitive
+instructions.  For our purposes this is excellent - we can focus on programs
+entirely at the level of their probabilistic components, and ignore the
+deterministic parts that would otherwise be distractions.
+
 To collect samples from `mixture`, we can first interpret it into a sampling
-function, and then simulate from it.  The `toSampler` function from before
-doesn't change much:
+function, and then simulate from it.  The `toSampler` function [from last
+time][sppl] doesn't change much:
 
 ``` haskell
 toSampler :: Program a a -> Prob IO a
@@ -167,7 +197,7 @@ Sampling from `mixture 2 3` a thousand times yields the following
 > simulate (toSampler (mixture 2 3))
 ```
 
-![](/images/mixture_samples.png)
+![](/images/mixture_samples.png){: .center-image }
 
 Note that the rightmost component gets more traffic due to the hyperparameter
 combination of 2 and 3 that we provided to `mixture`.
@@ -278,10 +308,9 @@ by David Wingate et al.
 
 ## Representing Running Programs
 
-Ok.  To perform inference on probabilistic programs according to the
-aforementioned Metropolis-Hastings algorithm, we need to represent *executing*
-programs somehow, in a form that enables us to examine and modify their
-internal state.
+To perform inference on probabilistic programs according to the aforementioned
+Metropolis-Hastings algorithm, we need to represent *executing* programs
+somehow, in a form that enables us to examine and modify their internal state.
 
 How can we do that?  We'll pluck another useful recursive structure from our
 repertoire and consider the humble `Cofree`:
@@ -396,7 +425,10 @@ execute = annotate defaultSeed where
 ```
 
 And there you have it - `execute` takes a terminating program as input and
-returns a running program - an execution trace - as output.
+returns a running program - an execution trace - as output.  The syntax tree we
+had previously gets turned into something like this:
+
+![](/images/mixture_ast_ann.png){: .center-image }
 
 ## Perturbing Running Programs
 
@@ -453,6 +485,17 @@ perturb :: Execution a -> Execution a
 perturb = extend perturbNode
 ```
 
+For some comonadic intuition: when we 'extend' a function over an execution,
+the trace itself gets 'duplicated' in a comonadic context.  Each node in the
+program becomes annotated with a view of *the rest of the execution trace* from
+that point forward.  It can be difficult to visualize at first, but I reckon
+the following image is pretty faithful:
+
+![](/images/mixture_ast_duplicate.png){: .center-image }
+
+Each annotation then has `perturbNode` applied to it, which reduces the trace
+back to the standard annotated version we saw before.
+
 ## Iterating the Markov Chain
 
 So: to move around in parameter space, we'll propose state changes by
@@ -463,10 +506,11 @@ If you already have no idea what I'm talking about, then the phrase 'local
 economic conditions' probably didn't help you much.  But it's a useful analogy
 to have in one's head.  Each state in parameter space has a cost associated
 with it - the cost of generating the observations that we're conditioning on
-while doing inference.  If certain parameter values are unlikely to generate
-the provided observations, then those observations will be *expensive* to
-generate when measured in terms of log-likelihood.  Parameter values that are
-likelier to generate the supplied observations will be comparatively cheaper.
+while doing inference.  If certain parameter values yield a data model that is
+unlikely to generate the provided observations, then those observations will be
+*expensive* to generate when measured in terms of log-likelihood.  Parameter
+values that yield data models more likely to generate the supplied observations
+will be comparatively cheaper.
 
 If a proposed execution trace is significantly cheaper than the trace we're
 currently at, then we usually want to move to it.  We allow some randomness in
@@ -578,7 +622,7 @@ I'll flip things and assign hyperparameters of 3 and 2 for the prior:
 > simulate (toSampler (prior 3 2 >>= likelihood))
 ```
 
-![](/images/mixture_trace.png)
+![](/images/mixture_trace.png){: .center-image }
 
 It looks like we're slightly more likely to sample from the left mixture
 component than the right one.  Again, this makes sense - the mean of a beta(3,
@@ -618,7 +662,7 @@ investigate arbitrary branches.
 The conditional distribution we've found over the mixing probability is as
 follows:
 
-![](/images/post_p.png)
+![](/images/post_p.png){: .center-image }
 
 Looks like we're in the right ballpark.
 
@@ -626,48 +670,42 @@ We can examine the traces of other elements of the program as well.  Here's the
 recorded distribution over component assignments, for example - note that the
 rightmost bar *here* corresponds to the leftmost component in the mixture:
 
-![](/images/post_b.png)
+![](/images/post_b.png){: .center-image }
 
 You can see that whenever we wandered into the rightmost component, we'd
 swiftly wind up jumping back out of it:
 
-![](/images/post_b_ts.png)
+![](/images/post_b_ts.png){: .center-image }
 
 ## Comments
 
 This is a fun take on probabilistic programming.  In particular I find a few
 aspects of the whole setup to be pretty attractive:
 
-* We use a primitive, limited instruction set to parameterize both programs
-  (via `Free`), and running programs (via `Cofree`).  These off-the-shelf
-  recursive types are used to wrap things up and provide most of our required
-  control flow automatically.
+We use a primitive, limited instruction set to parameterize both programs - via
+`Free` - and running programs - via `Cofree`.  These off-the-shelf recursive
+types are used to wrap things up and provide most of our required control flow
+automatically.  It's easy to transparently add structure to embedded programs
+built in this way; for example, we can statically [encode independence][indp]
+by replacing our `ModelF a` type with something like:
 
-* It's easy to transparently add structure to embedded programs.  For example,
-  we can statically [encode independence][indp] by replacing our `ModelF a`
-  type with something like:
+``` haskell
+data InstructionF a = Coproduct (ModelF a) (Ap (ModelF a))
+```
 
-  ``` haskell
-  data InstructionF a = Coproduct (ModelF a) (Ap (ModelF a))
-  ```
+This can be hidden from the user so that we're left with the same simple
+monadic syntax we presently enjoy, but we also get to take independence into
+account when performing inference, or any other structural interpretation for
+that matter.
 
-  This can be hidden from the user so that we're left with the same simple
-  monadic syntax we presently enjoy, but we can take independence into account
-  when performing inference, or any other structural interpretation.
-
-* The program representation is completely separate from whatever inference
-  backend we choose to augment it with.
-
-Additionally, when doing inference:
-
-* We can deal with traces as *first-class* values that can be directly stored,
-  inspected, manipulated, and so on.
-
-* Everything is done in a typed and purely-functional framework.  I've used
-  dynamic typing functionality from `Data.Dynamic` to store values here, but we
-  could similarly just define a concrete `Value` type with the appropriate
-  constructors for integers, doubles, bools, etc., and use that to store our
-  everything.
+When it comes to inference, the program representation is completely separate
+from whatever inference backend we choose to augment it with.  We can deal with
+traces as *first-class* values that can be directly stored, inspected,
+manipulated, and so on.  And everything is done in a typed and
+purely-functional framework.  I've used dynamic typing functionality from
+`Data.Dynamic` to store values in execution traces here, but we could similarly
+just define a concrete `Value` type with the appropriate constructors for
+integers, doubles, bools, etc., and use *that* to store everything.
 
 At the same time, this is a pretty early concept - doing inference
 *efficiently* in this setting is another matter, and there are a couple of
@@ -677,10 +715,10 @@ further progress.
 The current way I've organized Markov chain generation and iteration is just
 woefully inefficient.  Storing the history of each node on-site is needlessly
 costly and I'm sure results in a ton of unnecessary allocation.  On a semantic
-level, it also 'complects' state and identity needlessly: why, after all,
-should a single execution trace know anything about traces that preceded it?
-Clearly this should be accumulated in another data structure.  There is a lot
-of other low-hanging fruit as well.
+level, it also 'complects' state and identity: why, after all, should a single
+execution trace know anything about traces that preceded it?  Clearly this
+should be accumulated in another data structure.  There is a lot of other
+low-hanging fruit around strictness and PRNG management as well.
 
 From a more statistical angle, the present implementation does a poor job when
 it comes to perturbing execution traces.  Some changes - such as improving the
@@ -705,7 +743,7 @@ If you’re interested in playing with it, I've dumped the code from this post
 into [this gist][gist].
 
 Thanks to Niffe Hermansson and Fredrik Olsen for reviewing a draft of this
-post.
+post and providing helpful comments.
 
 [sppl]: https://medium.com/@jaredtobin/a-simple-embedded-probabilistic-programming-language-17bdaa08ed99#.dl2lt6cre
 [recs]: https://medium.com/@jaredtobin/a-tour-of-some-useful-recursive-types-8fa8e423b5b9#.j4z9r7vzd
@@ -723,4 +761,3 @@ post.
 [droy]: https://www.youtube.com/watch?v=TFXcVlKqPlM
 [indp]: https://medium.com/@jaredtobin/encoding-statistical-independence-statically-ec6a714cf24a#.l9odf3a3k
 [gist]: https://gist.github.com/jtobin/497e688359c17d1fdf9215868a300b55
-[medi]:
