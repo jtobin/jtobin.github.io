@@ -7,8 +7,11 @@ categories:
   - language-engineering
 ---
 
-In this post we're going to tweak and extend our [simple probabilistic
-programming language][sppl] to add a stateful, experimental inference backend.
+Some time ago I came across a way to *in-principle* perform inference on
+certain probabilistic programs using comonadic structures and operations.  I
+decided to dig it up and use it to extend the [simple probabilistic programming
+language][sppl] I talked about a few days ago with a stateful, experimental
+inference backend.  Enjoy!
 
 ## Representing Programs That Terminate
 
@@ -206,7 +209,7 @@ A geometric distribution that actually *used its argument* $$p$$, for $$0 < p
 \leq 1$$, could be guaranteed to terminate with probability 1.  This one
 doesn't, so `trollGeometric undefined >>= dirac` won't.
 
-At the end of the day we're stuck with what our host languages offers us.  So,
+At the end of the day we're stuck with what our host language offers us.  So,
 take the termination guarantees for our embedded language with a grain of salt.
 
 ## Stateful Inference
@@ -224,13 +227,13 @@ Cambridge in 2009.  I think they're unparalleled to this day.
 The point is that in higher dimensions we tend to get a lot out of state.
 Essentially, if one finds an interesting region of high-dimensional parameter
 space, then it's better to remember where that is, rather than forgetting it
-exists as soon as one stumbles onto it.  Interesting regions of space tend to
-be near other interesting regions of space, so exploring neighbourhoods of
-interesting places tends to pay off.  Stateful Monte Carlo methods - namely,
-the family of *Markov chain* Monte Carlo algorithms - handle exactly this, by
-using a Markov chain to wander over parameter space.  I've written on MCMC
-[in][decl] [the][flat] [past][rand] - you can check out some of those articles
-if you're interested.
+exists as soon as one stumbles onto it.  The manifold hypothesis conjectures
+that interesting regions of space tend to be near *other* interesting regions
+of space, so exploring neighbourhoods of interesting places tends to pay off.
+Stateful Monte Carlo methods - namely, the family of *Markov chain* Monte Carlo
+algorithms - handle exactly this, by using a Markov chain to wander over
+parameter space.  I've written on MCMC [in][decl] [the][flat] [past][rand] -
+you can check out some of those articles if you're interested.
 
 In the stateless rejection sampler we just performed conditional inference via
 the following algorithm:
@@ -290,7 +293,7 @@ information at each internal node.  This is a great feature; if we can annotate
 each internal node with important information about its state - its current
 value, the current state of its generator, the 'cost' associated with it - then
 we can walk through the program and examine it as required.  So, it can capture
-a 'running' program in exactly the required way.
+a 'running' program in exactly the way we need.
 
 Let's describe running programs as values having the following `Execution`
 type:
@@ -357,8 +360,9 @@ them.
 
 A quick-and-dirty answer for the first case is to just use dynamic typing when
 storing the values.  It works and is easy, but of course is subject to the
-standard caveats.  I use `unsafeFromDyn` to convert dynamically-typed values
-back to a typed form, so you can judge the safety of all this for yourself.
+standard caveats.  I use a function called `unsafeFromDyn` to convert
+dynamically-typed values back to a typed form, so you can gage the safety of
+all this for yourself.
 
 For the second case, I just use the `ST` monad, along with manual state
 snapshotting, to execute and iterate a random number generator.   Pretty
@@ -366,7 +370,7 @@ simple.
 
 Also: in terms of efficiency, keeping a node's history on-site at each
 execution falls into the 'completely insane' category, but let's not worry much
-about efficiency right now.  Prototypes gonna protoype and all that.
+about efficiency right now.  Prototypes gonna prototype and all that.
 
 Anyway.
 
@@ -454,14 +458,13 @@ perturbing the current state, and then accept or reject proposals according to
 local economic conditions.
 
 If you already have no idea what I'm talking about, then the phrase 'local
-economic conditions' probably didn't help you much.  My apologies.  But it's a
-useful analogy to have in one's head.  Each state in parameter space has a cost
-associated with it - the cost of generating the observations that we're
-conditioning on while doing inference.  If certain parameter values are
-unlikely to generate the provided observations, then those observations will be
-*expensive* to generate when measured in terms of log-likelihood.  Parameter
-values that are likelier to generate the supplied observations will be
-comparatively cheaper.
+economic conditions' probably didn't help you much.  But it's a useful analogy
+to have in one's head.  Each state in parameter space has a cost associated
+with it - the cost of generating the observations that we're conditioning on
+while doing inference.  If certain parameter values are unlikely to generate
+the provided observations, then those observations will be *expensive* to
+generate when measured in terms of log-likelihood.  Parameter values that are
+likelier to generate the supplied observations will be comparatively cheaper.
 
 If a proposed execution trace is significantly cheaper than the trace we're
 currently at, then we usually want to move to it.  We allow some randomness in
@@ -618,7 +621,8 @@ follows:
 Looks like we're in the right ballpark.
 
 We can examine the traces of other elements of the program as well.  Here's the
-recorded distribution over component assignments, for example:
+recorded distribution over component assignments, for example - note that the
+rightmost bar *here* corresponds to the leftmost component in the mixture:
 
 ![](/images/post_b.png)
 
@@ -630,7 +634,7 @@ wind up jumping back out of it:
 ## Comments
 
 This is a fun take on probabilistic programming.  In particular I find a few
-aspects of it pretty attractive:
+aspects of the whole setup to be pretty attractive:
 
 * We use a primitive, limited instruction set to parameterize both programs
   (via `Free`), and running programs (via `Cofree`).  These off-the-shelf
@@ -652,41 +656,53 @@ aspects of it pretty attractive:
 * The program representation is completely separate from whatever inference
   backend we choose to augment it with.
 
-* When doing inference, we can deal with traces as *first-class* values that
-  can be directly stored, inspected, manipulated, and so on.
+Additionally, when doing inference:
+
+* We can deal with traces as *first-class* values that can be directly stored,
+  inspected, manipulated, and so on.
 
 * Everything is done in a typed and purely-functional framework.  I've used
   dynamic typing functionality from `Data.Dynamic` to store values here, but we
   could similarly just define a concrete `Value` type with the appropriate
-  constructors for integers, doubles, bools, etc.
+  constructors for integers, doubles, bools, etc., and use that to store our
+  everything.
 
 At the same time, this is a pretty early concept - doing inference
 *efficiently* in this setting is another matter, and there are a couple of
-computational and statistical issues to tackle here.
+computational and statistical issues here that need to be ironed out to make
+further progress.
 
 The current way I've organized Markov chain generation and iteration is just
-woefully inefficient.  Storing the history of each node *on-site* is needlessly
+woefully inefficient.  Storing the history of each node on-site is needlessly
 costly and I'm sure results in a ton of unnecessary allocation.  On a semantic
 level, it also 'complects' state and identity needlessly: why, after all,
-should a single execution trace know anything about traces that preceeded it?
+should a single execution trace know anything about traces that preceded it?
 Clearly this should be accumulated in another data structure.  There is a lot
 of other low-hanging fruit as well.
 
 From a more statistical angle, the present implementation does a poor job when
-it comes to perturbing execution traces.  Some - such as improving the proposal
-mechanism for a given instruction - are easy to implement, and representing
-distributions as instructions indeed makes it easy to tailor local proposal
-distributions in a context-independent way.  But another problem is that, by
-using a 'blunt' comonadic `extend`, we perturb an execution by perturbing
-*every node* in it.  In general it's better to make small perturbations rather
-than large ones to ensure a reasonable acceptance ratio, but to do that we'd
-need to perturb single nodes (or at least subsets of nodes) at a time.
+it comes to perturbing execution traces.  Some changes - such as improving the
+proposal mechanism for a given instruction - are easy to implement, and
+representing distributions as instructions indeed makes it easy to tailor local
+proposal distributions in a context-independent way.  But another problem is
+that, by using a 'blunt' comonadic `extend`, we perturb an execution by
+perturbing *every node* in it.  In general it's better to make small
+perturbations rather than large ones to ensure a reasonable acceptance ratio,
+but to do that we'd need to perturb single nodes (or at least subsets of nodes)
+at a time.
 
 There *may* be some inroads here via comonad transformers like `StoreT` or
-lenses, but my comonad-fu is not yet quite at the required level.  We'll come
-back to this some other time.
+lenses that would allow us to zoom in on a particular node and perturb it,
+rather than perturbing everything at once.  But my comonad-fu is not yet quite
+at the required level to evaluate this, so I'll come back to that idea some
+other time.
 
-Enjoy!  You can check out the code from this post in [this gist][gist].
+I’m interested in playing with this concept some more in the future, though I’m
+not yet sure how much I expect it to be a tenable way to do inference at scale.
+If you’re interested in playing with it, I've dumped the code from this post
+into [this gist][gist].
+
+Thanks to Niffe Hermansson for reviewing a draft of this post.
 
 [sppl]: https://medium.com/@jaredtobin/a-simple-embedded-probabilistic-programming-language-17bdaa08ed99#.dl2lt6cre
 [recs]: https://medium.com/@jaredtobin/a-tour-of-some-useful-recursive-types-8fa8e423b5b9#.j4z9r7vzd
