@@ -7,6 +7,8 @@ categories:
   - language-engineering
 ---
 
+(This article is also published at [Medium][medi])
+
 Some time ago I came across a way to *in-principle* perform inference on
 certain probabilistic programs using comonadic structures and operations.  I
 decided to dig it up and use it to extend the [simple probabilistic programming
@@ -361,7 +363,7 @@ them.
 A quick-and-dirty answer for the first case is to just use dynamic typing when
 storing the values.  It works and is easy, but of course is subject to the
 standard caveats.  I use a function called `unsafeFromDyn` to convert
-dynamically-typed values back to a typed form, so you can gage the safety of
+dynamically-typed values back to a typed form, so you can gauge the safety of
 all this for yourself.
 
 For the second case, I just use the `ST` monad, along with manual state
@@ -626,8 +628,8 @@ rightmost bar *here* corresponds to the leftmost component in the mixture:
 
 ![](/images/post_b.png)
 
-You can see that whenever we wandered into the second component, we'd swiftly
-wind up jumping back out of it:
+You can see that whenever we wandered into the rightmost component, we'd
+swiftly wind up jumping back out of it:
 
 ![](/images/post_b_ts.png)
 
@@ -702,7 +704,8 @@ not yet sure how much I expect it to be a tenable way to do inference at scale.
 If you’re interested in playing with it, I've dumped the code from this post
 into [this gist][gist].
 
-Thanks to Niffe Hermansson for reviewing a draft of this post.
+Thanks to Niffe Hermansson and Fredrik Olsen for reviewing a draft of this
+post.
 
 [sppl]: https://medium.com/@jaredtobin/a-simple-embedded-probabilistic-programming-language-17bdaa08ed99#.dl2lt6cre
 [recs]: https://medium.com/@jaredtobin/a-tour-of-some-useful-recursive-types-8fa8e423b5b9#.j4z9r7vzd
@@ -720,4 +723,4 @@ Thanks to Niffe Hermansson for reviewing a draft of this post.
 [droy]: https://www.youtube.com/watch?v=TFXcVlKqPlM
 [indp]: https://medium.com/@jaredtobin/encoding-statistical-independence-statically-ec6a714cf24a#.l9odf3a3k
 [gist]: https://gist.github.com/jtobin/497e688359c17d1fdf9215868a300b55
-
+[medi]:
