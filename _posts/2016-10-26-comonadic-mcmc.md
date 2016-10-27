@@ -8,12 +8,11 @@ categories:
 ---
 
 Some time ago I came across a way to in-principle perform inference on certain
-probabilistic programs using comonadic structures and operations.  I decided to
-dig it up and try to use it to extend the [simple probabilistic programming
-language][sppl] I talked about a few days ago with a stateful, experimental
-inference backend.
+probabilistic programs using comonadic structures and operations.
 
-In this post we'll
+I decided to dig it up and try to use it to extend the [simple probabilistic
+programming language][sppl] I talked about a few days ago with a stateful,
+experimental inference backend.  In this post we'll
 
 * Represent probabilistic programs as recursive types parameterized by
   a terminating instruction set.
